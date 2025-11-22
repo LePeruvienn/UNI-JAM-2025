@@ -167,12 +167,7 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            /*
-            foreach (var rule in presentedRules)
-            {
-                if (slideManager.IsRuleActive(rule)) //Add simon here if he activates rules
-                    activeRules.Add(rule);
-            }*/
+            
             // Apply ALL active rules to the slide
             SetRules(activeRules);
 
