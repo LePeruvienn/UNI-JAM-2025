@@ -7,6 +7,9 @@ namespace Assets
 {
     public class SlideManager : MonoBehaviour
     {
+        public Textdata textData;
+        public Textdata titleData;
+
         [SerializeField] private GameObject testSlide;
         [SerializeField] private TMP_Text slideText; 
         [SerializeField] private TMP_Text slideTitle;
@@ -26,9 +29,9 @@ namespace Assets
         public void GenerateSlide()
         {
             //pull this shit from a json
-            string genText = "aaa text";
-            string genTitle = "Default title";
-            Texture2D loadedTexture = allImages[UnityEngine.Random.Range(0, allImages.Length - 1)];
+            string genText = textData.text[UnityEngine.Random.Range(0, textData.text.Length)];
+            string genTitle = titleData.text[UnityEngine.Random.Range(0, titleData.text.Length)];
+            Texture2D loadedTexture = allImages[UnityEngine.Random.Range(0, allImages.Length)];
 
             slideText.text = genText;
             slideTitle.text = genTitle;
