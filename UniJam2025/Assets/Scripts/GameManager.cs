@@ -8,7 +8,7 @@ using UnityEngine.Windows;
 public class GameManager : MonoBehaviour
 {
     public UnityEvent<Rule.ActionType> OnSlideSuccess;
-    public UnityEvent OnSlideFail;
+    public UnityEvent<bool> OnSlideFail;
 
     public UnityEvent OnSlideFailEnd;
 
@@ -251,13 +251,13 @@ public class GameManager : MonoBehaviour
     private IEnumerator FailCoroutine()
     {
         // Announce that a fail happened
-        OnSlideFail?.Invoke();
+        OnSlideFail?.Invoke(true);
 
         // Wait for 4 seconds
         yield return new WaitForSeconds(failTime);
 
         // Announce that the fail effect is over
-        OnSlideFailEnd?.Invoke();
+        OnSlideFail?.Invoke(false);
 
         failRoutine = null;
     }
