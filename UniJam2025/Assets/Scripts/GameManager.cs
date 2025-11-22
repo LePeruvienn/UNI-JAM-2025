@@ -1,4 +1,5 @@
 using Assets;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,6 +9,8 @@ public class GameManager : MonoBehaviour
 {
     public UnityEvent<Rule.ActionType> OnSlideSuccess;
     public UnityEvent OnSlideFail;
+
+    public UnityEvent OnSlideFailEnd;
 
 
     private List<Rule.ActionType> requiredActions = new List<Rule.ActionType>();
@@ -26,8 +29,14 @@ public class GameManager : MonoBehaviour
 
     public float timeLimit = 5f;
 
+    public float failTime = 4f;
+
+
+    private Coroutine failRoutine;
 
     public static GameManager Instance { get; private set; }
+
+
 
     private void Awake()
     {
@@ -95,9 +104,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Wrong input: " + input);
 
-            OnSlideFail?.Invoke();
-
-            //add coroutine for failure event
+            TriggerFail();
         }
     }
 
@@ -118,24 +125,28 @@ public class GameManager : MonoBehaviour
         slideCount++;
         Debug.Log("[GameManager] Loading next slide...");
 
-        // Every 5 slides -> introduce a new rule
         if (slideCount % 5 == 1)
         {
-            // Generate a new rule (assuming you keep a list called activeRules)
             Rule newRule = RuleGenerator.GenerateRandomRule(activeRules);
             activeRules.Add(newRule);
 
             Debug.Log("[GameManager] New rule generated: " + newRule.description);
 
-            // Tell SlideManager to generate a special "rule slide"
-            slideManager.GenerateRuleSlide(newRule.description);
+            StartCoroutine(ShowRuleSlideThenContinue(newRule.description));
+
+
+            // RULE SLIDE = no gameplay rules yet
+            timerRunning = false;
         }
         else
         {
-            // Regular gameplay slide
+            // Apply ALL active rules to the slide
+            SetRules(activeRules);
+
             slideManager.GenerateSlide();
         }
     }
+
 
 
     private void StartSlideTimer()
@@ -154,9 +165,8 @@ public class GameManager : MonoBehaviour
 
         if (simon.GetSimonState().Equals("Posing")) {
 
-            OnSlideFail?.Invoke();
+            TriggerFail();
 
-            //add coroutine for failure event
         }
 
 
@@ -226,5 +236,42 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void TriggerFail()
+    {
+        if (failRoutine != null)
+        {
+            StopCoroutine(failRoutine);
+        }
+
+        failRoutine = StartCoroutine(FailCoroutine());
+    }
+
+    private IEnumerator FailCoroutine()
+    {
+        // Announce that a fail happened
+        OnSlideFail?.Invoke();
+
+        // Wait for 4 seconds
+        yield return new WaitForSeconds(failTime);
+
+        // Announce that the fail effect is over
+        OnSlideFailEnd?.Invoke();
+
+        failRoutine = null;
+    }
+
+    private IEnumerator ShowRuleSlideThenContinue(string description)
+    {
+        slideManager.GenerateRuleSlide(description);
+
+        timerRunning = false; // stop gameplay timer
+
+        yield return new WaitForSeconds(5f);
+
+        // Now load the next *gameplay* slide
+        SetRules(activeRules);
+        slideManager.GenerateSlide();
+        StartSlideTimer();
+    }
 
 }
