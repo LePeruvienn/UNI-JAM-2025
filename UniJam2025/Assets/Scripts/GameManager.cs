@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
+
+        LoadNextSlide();
     } 
 
     public void SetRules(List<Rule> rules)
