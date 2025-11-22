@@ -13,6 +13,12 @@ public class GameManager : MonoBehaviour
 
     private int slideCount = 0;
 
+    private float slideTimer = 0f;
+    private bool timerRunning = false;
+
+    public float timeLimit = 5f;   
+
+
     public void SetRules(List<Rule> rules)
     {
         requiredActions = BuildRequiredActions(rules);
@@ -24,6 +30,8 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Required: " + action);
         }
+
+        StartSlideTimer();
     }
 
 
@@ -68,6 +76,9 @@ public class GameManager : MonoBehaviour
 
     private void SlideCompletedSuccessfully()
     {
+
+        timerRunning = false;
+
         Debug.Log("Slide successfully completed.");
         IncreaseHealth();
 
@@ -93,4 +104,37 @@ public class GameManager : MonoBehaviour
         health = Mathf.Clamp(health - 10, 0, 100);
         Debug.Log("Penalty applied. Current health: " + health);
     }
+
+    private void StartSlideTimer()
+    {
+        if (!timerRunning)
+        {
+            slideTimer = timeLimit;
+            timerRunning = true;
+        }
+        Debug.Log("[GameManager] Timer started: " + slideTimer + " seconds");
+    }
+
+    private void SlideFailedDueToTimeout()
+    {
+        Debug.Log("Slide failed: Time expired.");
+        ApplyPenalty();
+
+        LoadNextSlide();
+    }
+
+    private void Update()
+    {
+        if (!timerRunning)
+            return;
+
+        slideTimer -= Time.deltaTime;
+
+        if (slideTimer <= 0f)
+        {
+            timerRunning = false;
+            SlideFailedDueToTimeout();
+        }
+    }
+
 }
