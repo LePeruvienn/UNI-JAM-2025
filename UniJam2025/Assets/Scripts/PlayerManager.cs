@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class PlayerManager : MonoBehaviour
 {
     [Header("Vie")]
-    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int maxHealth = 5;
     [SerializeField] private int currentHealth;
 
     [Header("Animation / Sprite")]
@@ -22,8 +22,6 @@ public class PlayerManager : MonoBehaviour
 
     [Header("Réponse aux slides")]
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private int slideFailDamage = 10;
-    [SerializeField] private int slideSuccessHeal = 10;
 
     [Header("Evénements")]
     public UnityEvent onDamaged;
@@ -111,25 +109,23 @@ public class PlayerManager : MonoBehaviour
         spriteRenderer.color = original;
     }
 
-    public void ApplyDamage(int amount)
+    public void ApplyDamage()
     {
-        if (amount <= 0) return;
-        currentHealth -= amount;
+        currentHealth -= 1;
         currentHealth = Mathf.Max(0, currentHealth);
-        Debug.Log($"[PlayerManager] Dégâts: {amount} -> HP = {currentHealth}/{maxHealth}");
+        Debug.Log($"[PlayerManager] Dégâts: 1 -> HP = {currentHealth}/{maxHealth}");
         onDamaged?.Invoke();
 
         if (currentHealth == 0)
             Die();
     }
 
-    public void ApplyHeal(int amount)
+    public void ApplyHeal()
     {
-        if (amount <= 0) return;
         int prev = currentHealth;
-        currentHealth += amount;
+        currentHealth += 1;
         currentHealth = Mathf.Min(maxHealth, currentHealth);
-        Debug.Log($"[PlayerManager] Soin: {amount} -> HP = {currentHealth}/{maxHealth} (was {prev})");
+        Debug.Log($"[PlayerManager] Soin: 1 -> HP = {currentHealth}/{maxHealth} (was {prev})");
         onHealed?.Invoke();
     }
 
@@ -143,12 +139,12 @@ public class PlayerManager : MonoBehaviour
 
     private void HandleSlideFail(bool value)
     {
-        ApplyDamage(slideFailDamage);
+        ApplyDamage();
     }
 
     private void HandleSlideSuccess(Rule.ActionType type)
     {
-        ApplyHeal(slideSuccessHeal);
+        ApplyHeal();
     }
 
     public int GetCurrentHealth() => currentHealth;
