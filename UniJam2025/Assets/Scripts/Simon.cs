@@ -1,8 +1,17 @@
 using UnityEngine;
 
+public enum SimonState {
+
+    Walking,
+    Idle,
+    Posing
+}
+
 public class Simon : MonoBehaviour
 {
-    private enum SimonState { Walking, Idle, Posing }
+
+    [Header("LOCK SYSTEM")]
+    [SerializeField] private bool isLocked = false;
 
     [Header("=== TEMPO ===")]
     [SerializeField] private float tempoMin = 1f;
@@ -51,6 +60,17 @@ public class Simon : MonoBehaviour
 
     private void Update()
     {
+        // Return if Simon is locked stop there
+        if (isLocked) {
+
+            if (state == SimonState.Walking) {
+                HandleBoundaries();
+                rb.linearVelocity = new Vector2(direction * speed, 0);
+            }
+
+            return;
+        }
+
         tempoTimer += Time.deltaTime;
         stateTimer += Time.deltaTime;
 
@@ -79,7 +99,8 @@ public class Simon : MonoBehaviour
 
     private void EvaluateNextState()
     {
-        if (state == SimonState.Posing || state == SimonState.Idle) return;
+        if (state == SimonState.Posing || state == SimonState.Idle)
+            return;
 
         float timeSinceLastPose = Time.time - lastPoseTime;
 
@@ -138,8 +159,8 @@ public class Simon : MonoBehaviour
 
     private void UpdateWalking()
     {
-        rb.linearVelocity = new Vector2(direction * speed, 0);
         HandleBoundaries();
+        rb.linearVelocity = new Vector2(direction * speed, 0);
     }
 
     private void UpdateIdle()
@@ -188,5 +209,15 @@ public class Simon : MonoBehaviour
     private void PickRandomDirection()
     {
         direction = Random.value > 0.5f ? 1 : -1;
+    }
+
+    public SimonState GetSimonState()
+    {
+        return state;
+    }
+
+    public void SetLocked(bool val)
+    {
+        isLocked = val;
     }
 }
