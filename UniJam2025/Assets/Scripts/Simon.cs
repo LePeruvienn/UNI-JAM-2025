@@ -142,7 +142,7 @@ public class Simon : MonoBehaviour
     // ------------------------------
     // STATES
     // ------------------------------
-    private void ChangeState(SimonState newState)
+    public void ChangeState(SimonState newState)
     {
         state = newState;
         stateTimer = 0f;
@@ -194,7 +194,6 @@ public class Simon : MonoBehaviour
             }
 
             PickRandomDirection();
-            ChangeState(SimonState.Walking);
         }
     }
 
@@ -203,7 +202,6 @@ public class Simon : MonoBehaviour
         if (stateTimer >= baitingDuration)
         {
             PickRandomDirection();
-            ChangeState(SimonState.Walking);
         }
     }
 
@@ -218,7 +216,6 @@ public class Simon : MonoBehaviour
         if (stateTimer >= Mathf.Min(poseDuration, poseMaxDuration))
         {
             PickRandomDirection();
-            ChangeState(SimonState.Walking);
         }
     }
 

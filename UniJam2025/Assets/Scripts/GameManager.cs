@@ -117,9 +117,8 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Slide successfully completed.");
 
-        OnSlideSuccess?.Invoke(input);
+        StartCoroutine(SuccessfulSlideDelay(input));
 
-        LoadNextSlide();
     }
 
     private void LoadNextSlide()
@@ -240,6 +239,10 @@ public class GameManager : MonoBehaviour
 
     public void TriggerFail()
     {
+
+        requiredActions.Clear();
+        pendingActions.Clear();
+
         if (failRoutine != null)
         {
             StopCoroutine(failRoutine);
@@ -252,6 +255,8 @@ public class GameManager : MonoBehaviour
     {
         // Announce that a fail happened
         OnSlideFail?.Invoke(true);
+
+        simon.ChangeState(SimonState.Walking);
 
         // Wait for 4 seconds
         yield return new WaitForSeconds(failTime);
@@ -275,5 +280,19 @@ public class GameManager : MonoBehaviour
         slideManager.GenerateSlide();
         StartSlideTimer();
     }
+
+    private IEnumerator SuccessfulSlideDelay(Rule.ActionType lastInput)
+    {
+        // invoke success event so audience reacts
+        OnSlideSuccess?.Invoke(lastInput);
+
+        // Simon stops posing -> walks again during applause
+        simon.ChangeState(SimonState.Walking);
+
+        yield return new WaitForSeconds(3f);
+
+        LoadNextSlide();
+    }
+
 
 }
