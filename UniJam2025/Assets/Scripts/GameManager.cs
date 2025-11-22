@@ -36,6 +36,14 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip failClip;
+    [SerializeField] private AudioClip clapAudienceClip;
+    [SerializeField] private AudioClip hiFiveAudienceClip;
+    [SerializeField] private AudioClip riseHandsAudienceClip;
+    [SerializeField] private AudioClip changeSlideClip;
+
 
 
     private void Awake()
@@ -50,6 +58,10 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
+
+        // ensure audio source
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
 
         LoadNextSlide();
     } 
@@ -119,6 +131,9 @@ public class GameManager : MonoBehaviour
 
         OnSlideSuccess?.Invoke(input);
 
+        // jouer le son d'audience correspondant au succès
+        PlayAudienceAudio(input);
+
         LoadNextSlide();
     }
 
@@ -126,6 +141,9 @@ public class GameManager : MonoBehaviour
     {
         slideCount++;
         Debug.Log("[GameManager] Loading next slide...");
+
+        // play change slide audio
+        PlayClip(changeSlideClip);
 
         if (slideCount % 5 == 1)
         {
@@ -207,8 +225,6 @@ public class GameManager : MonoBehaviour
         OnPlayerInput(Rule.ActionType.RaiseHands);
     }
 
-
-
     public void LoadTestActions()
     {
         // Clear any previous actions
@@ -253,7 +269,10 @@ public class GameManager : MonoBehaviour
         // Announce that a fail happened
         OnSlideFail?.Invoke(true);
 
-        // Wait for 4 seconds
+        // play fail audio once at the start of the fail
+        PlayClip(failClip);
+
+        // Wait for failTime seconds
         yield return new WaitForSeconds(failTime);
 
         // Announce that the fail effect is over
@@ -274,6 +293,29 @@ public class GameManager : MonoBehaviour
         SetRules(activeRules);
         slideManager.GenerateSlide();
         StartSlideTimer();
+    }
+
+    // Helper functions to play audio
+    private void PlayClip(AudioClip clip)
+    {
+        if (audioSource == null || clip == null) return;
+        audioSource.PlayOneShot(clip);
+    }
+
+    private void PlayAudienceAudio(Rule.ActionType action)
+    {
+        switch (action)
+        {
+            case Rule.ActionType.Clap:
+                PlayClip(clapAudienceClip);
+                break;
+            case Rule.ActionType.HighFive:
+                PlayClip(hiFiveAudienceClip);
+                break;
+            case Rule.ActionType.RaiseHands:
+                PlayClip(riseHandsAudienceClip);
+                break;
+        }
     }
 
 }
