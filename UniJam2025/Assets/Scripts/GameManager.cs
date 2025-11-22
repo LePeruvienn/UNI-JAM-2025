@@ -1,15 +1,21 @@
 using Assets;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+
+
+    public UnityEvent OnSlideSuccess;
+    public UnityEvent OnSlideFail;
+
+    public int health = 50;
+
     private List<Rule.ActionType> requiredActions = new List<Rule.ActionType>();
     private List<Rule.ActionType> pendingActions = new List<Rule.ActionType>();
 
     public SlideManager slideManager;   
-
-    public int health = 50;
 
     private int slideCount = 0;
 
@@ -57,7 +63,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("[GameManager] Player input: " + input);
 
-        if (pendingActions.Contains(input))
+        if (pendingActions.Contains(input) ) //add simon active check
         {
             pendingActions.Remove(input);
             Debug.Log("Correct input: " + input);
@@ -81,6 +87,8 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Slide successfully completed.");
         IncreaseHealth();
+        //
+        OnSlideSuccess?.Invoke();
 
         LoadNextSlide();
     }
@@ -90,7 +98,13 @@ public class GameManager : MonoBehaviour
         slideCount++;
         Debug.Log("[GameManager] Loading next slide...");
 
-        slideManager.GenerateSlide();
+        if (slideCount % 5 == 0)
+        {
+           // slideManager.GenerateRuleSlide();
+        }
+        else { 
+            slideManager.GenerateSlide();
+        }
     }
 
     private void IncreaseHealth()
@@ -103,6 +117,8 @@ public class GameManager : MonoBehaviour
     {
         health = Mathf.Clamp(health - 10, 0, 100);
         Debug.Log("Penalty applied. Current health: " + health);
+
+        OnSlideFail?.Invoke();
     }
 
     private void StartSlideTimer()
@@ -119,6 +135,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Slide failed: Time expired.");
         ApplyPenalty();
+        //add active check
+        OnSlideFail?.Invoke();
 
         LoadNextSlide();
     }
@@ -136,5 +154,55 @@ public class GameManager : MonoBehaviour
             SlideFailedDueToTimeout();
         }
     }
+
+    public void OnClap()
+    {
+        Debug.Log("[TestCallback] Reçu : Clap (UI ou clavier). Time=" + Time.time);
+        OnPlayerInput(Rule.ActionType.Clap);
+    }
+
+    public void OnHiFive()
+    {
+        Debug.Log("[TestCallback] Reçu : HiFive (UI ou clavier). Time=" + Time.time);
+        OnPlayerInput(Rule.ActionType.HighFive);
+    }
+
+    public void OnRiseHands()
+    {
+        Debug.Log("[TestCallback] Reçu : RiseHands (UI ou clavier). Time=" + Time.time);
+        OnPlayerInput(Rule.ActionType.RaiseHands);
+    }
+
+
+
+    public void LoadTestActions()
+    {
+        // Clear any previous actions
+        requiredActions.Clear();
+        pendingActions.Clear();
+
+        // Example test list
+        List<Rule.ActionType> testActions = new List<Rule.ActionType>()
+    {
+        Rule.ActionType.Clap,
+        Rule.ActionType.HighFive,
+        Rule.ActionType.Clap
+    };
+
+        // Fill the required and pending lists
+        requiredActions = new List<Rule.ActionType>(testActions);
+        pendingActions = new List<Rule.ActionType>(testActions);
+
+        // Start the timer
+        StartSlideTimer();
+
+        // Debug log
+        Debug.Log("[Test] Loaded test actions:");
+        foreach (var action in testActions)
+        {
+            Debug.Log("- " + action);
+        }
+    }
+
 
 }
