@@ -1,0 +1,75 @@
+{
+    "version": 1,
+    "name": "InputManager",
+    "maps": [
+        {
+            "name": "player",
+            "id": "bfa343c8-951a-4ad2-b04d-9a6d806c9d7a",
+            "actions": [
+                {
+                    "name": "Clap",
+                    "type": "Button",
+                    "id": "826806c0-9cc1-4ea5-bbf2-ea29cbce331a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HiFive",
+                    "type": "Button",
+                    "id": "29dd90c3-16b3-4d62-ae3f-05b68053caaf",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RiseHands",
+                    "type": "Button",
+                    "id": "b89a008a-3399-42c9-acc1-31f9fbc7509e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f585284f-5fe0-45fc-957d-b2683401f713",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Clap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "859757d4-d80b-4e8f-96e2-f646032c1544",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HiFive",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d43eb128-68e0-44e1-8a59-7b0ee54f7f5c",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RiseHands",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
