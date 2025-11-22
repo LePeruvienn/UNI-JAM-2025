@@ -146,7 +146,7 @@ public class PlayerManager : MonoBehaviour
         ApplyDamage(slideFailDamage);
     }
 
-    private void HandleSlideSuccess()
+    private void HandleSlideSuccess(Rule.ActionType type)
     {
         ApplyHeal(slideSuccessHeal);
     }
