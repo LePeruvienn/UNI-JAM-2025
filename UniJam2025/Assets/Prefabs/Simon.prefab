@@ -132,6 +132,7 @@ MonoBehaviour:
   tempoMin: 1
   tempoMax: 2
   idleChance: 0.5
+  baitingChance: 0.2
   poseChance: 0.1
   postIdlePoseChance: 0.3
   poseDurationMin: 1
@@ -139,6 +140,8 @@ MonoBehaviour:
   poseMinCooldown: 10
   poseMaxCooldown: 15
   poseMaxDuration: 4
+  baitingDurationMin: 0.5
+  baitingDurationMax: 1
   speed: 2
   leftBoundary: {fileID: 0}
   rightBoundary: {fileID: 0}
