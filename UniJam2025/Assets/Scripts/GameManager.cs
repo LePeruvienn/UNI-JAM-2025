@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-
-
     public UnityEvent OnSlideSuccess;
     public UnityEvent OnSlideFail;
 
@@ -24,7 +22,6 @@ public class GameManager : MonoBehaviour
     private bool timerRunning = false;
 
     public float timeLimit = 5f;
-
 
 
     public static GameManager Instance { get; private set; }
