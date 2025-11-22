@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
     private List<Rule.ActionType> requiredActions = new List<Rule.ActionType>();
     private List<Rule.ActionType> pendingActions = new List<Rule.ActionType>();
 
-    
+    // public SlideManager slideManager;   //-> slide manager
+
     public int health = 50;
 
     private int slideCount = 0;
