@@ -15,15 +15,33 @@ public class GameManager : MonoBehaviour
     private List<Rule.ActionType> requiredActions = new List<Rule.ActionType>();
     private List<Rule.ActionType> pendingActions = new List<Rule.ActionType>();
 
-    public SlideManager slideManager;   
+    public SlideManager slideManager;
+    public Simon simon;
 
     private int slideCount = 0;
 
     private float slideTimer = 0f;
     private bool timerRunning = false;
 
-    public float timeLimit = 5f;   
+    public float timeLimit = 5f;
 
+
+
+    public static GameManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        // If an instance already exists and it’s not this, destroy this object
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+        DontDestroyOnLoad(gameObject);
+    } 
 
     public void SetRules(List<Rule> rules)
     {
@@ -63,7 +81,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("[GameManager] Player input: " + input);
 
-        if (pendingActions.Contains(input) ) //add simon active check
+        if (pendingActions.Contains(input) && simon.GetSimonState().Equals("Posing")) //add simon active check
         {
             pendingActions.Remove(input);
             Debug.Log("Correct input: " + input);
@@ -135,8 +153,12 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Slide failed: Time expired.");
         ApplyPenalty();
-        //add active check
-        OnSlideFail?.Invoke();
+
+        if (simon.GetSimonState().Equals("Posing")) {
+
+            OnSlideFail?.Invoke();
+        }
+
 
         LoadNextSlide();
     }

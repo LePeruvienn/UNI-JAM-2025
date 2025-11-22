@@ -35,7 +35,7 @@ public class Simon : MonoBehaviour
     [SerializeField] private Transform rightBoundary;
 
     private Rigidbody2D rb;
-    private SpriteRenderer sr;
+    private SpriteRenderer sr; 
     private Color baseColor;
 
     private SimonState state;
