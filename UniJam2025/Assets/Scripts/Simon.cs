@@ -4,6 +4,7 @@ public enum SimonState {
 
     Walking,
     Idle,
+    Baiting,
     Posing
 }
 
@@ -19,6 +20,7 @@ public class Simon : MonoBehaviour
 
     [Header("=== CHANCES ===")]
     [SerializeField, Range(0f, 1f)] private float idleChance = 0.4f;
+    [SerializeField, Range(0f, 1f)] private float baitingChance = 0.2f;
     [SerializeField, Range(0f, 1f)] private float poseChance = 0.1f;
     [SerializeField, Range(0f, 1f)] private float postIdlePoseChance = 0.3f;
 
@@ -28,6 +30,12 @@ public class Simon : MonoBehaviour
     [SerializeField] private float poseMinCooldown = 2f;  // Minimum wait before next pose
     [SerializeField] private float poseMaxCooldown = 6f;  // Maximum wait before forcing next pose
     [SerializeField] private float poseMaxDuration = 4f;  // Maximum time a single pose can last
+
+    [Header("=== BAITING SETTINGS ===")]
+    [SerializeField] private float baitingDurationMin = 0.5f;
+    [SerializeField] private float baitingDurationMax = 1.0f;
+
+    private float baitingDuration;
 
     [Header("=== MOVEMENT ===")]
     [SerializeField] private float speed = 2f;
@@ -60,7 +68,6 @@ public class Simon : MonoBehaviour
 
     private void Update()
     {
-        // Return if Simon is locked stop there
         if (isLocked) {
 
             if (state == SimonState.Walking) {
@@ -78,6 +85,7 @@ public class Simon : MonoBehaviour
         {
             case SimonState.Walking: UpdateWalking(); break;
             case SimonState.Idle: UpdateIdle(); break;
+            case SimonState.Baiting: UpdateBaiting(); break;
             case SimonState.Posing: UpdatePose(); break;
         }
 
@@ -99,33 +107,35 @@ public class Simon : MonoBehaviour
 
     private void EvaluateNextState()
     {
-        if (state == SimonState.Posing || state == SimonState.Idle)
+        // On n'évalue pas de nouvelle transition si on est déjà dans un état "bloquant"
+        if (state == SimonState.Posing || state == SimonState.Idle || state == SimonState.Baiting) 
             return;
 
         float timeSinceLastPose = Time.time - lastPoseTime;
 
-        // Force pose if max cooldown reached
-        if (timeSinceLastPose >= poseMaxCooldown)
+        // 1. Check Posing (Force ou Chance)
+        if (timeSinceLastPose >= poseMaxCooldown || 
+            (timeSinceLastPose >= poseMinCooldown && Random.value < poseChance))
         {
             StartPose();
             return;
         }
 
-        // Only allow pose if min cooldown passed
-        if (timeSinceLastPose >= poseMinCooldown && Random.value < poseChance)
+        // 2. Check Baiting (Nouvelle vérification)
+        if (Random.value < baitingChance)
         {
-            StartPose();
+            ChangeState(SimonState.Baiting);
             return;
         }
 
-        // Idle check
+        // 3. Check Idle
         if (Random.value < idleChance)
         {
             ChangeState(SimonState.Idle);
             return;
         }
 
-        // Continue walking
+        // 4. Continue walking
         ChangeState(SimonState.Walking);
     }
 
@@ -146,6 +156,12 @@ public class Simon : MonoBehaviour
             case SimonState.Idle:
                 rb.linearVelocity = Vector2.zero;
                 sr.color = baseColor;
+                break;
+
+            case SimonState.Baiting:
+                rb.linearVelocity = Vector2.zero;
+                sr.color = Color.yellow; // Visualisation de l'état Baiting (peut être ajusté)
+                baitingDuration = Random.Range(baitingDurationMin, baitingDurationMax);
                 break;
 
             case SimonState.Posing:
@@ -177,6 +193,15 @@ public class Simon : MonoBehaviour
                 return;
             }
 
+            PickRandomDirection();
+            ChangeState(SimonState.Walking);
+        }
+    }
+
+    private void UpdateBaiting()
+    {
+        if (stateTimer >= baitingDuration)
+        {
             PickRandomDirection();
             ChangeState(SimonState.Walking);
         }
