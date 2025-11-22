@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     private List<Rule.ActionType> requiredActions = new List<Rule.ActionType>();
     private List<Rule.ActionType> pendingActions = new List<Rule.ActionType>();
 
-    // public SlideManager slideManager;   //-> slide manager
+    public SlideManager slideManager;   
 
     public int health = 50;
 
@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
         slideCount++;
         Debug.Log("[GameManager] Loading next slide...");
 
-        //slideManager.GenerateNextSlide(slideCount);   //--> uncomment when slidemanager is implemented
+        slideManager.GenerateSlide();
     }
 
     private void IncreaseHealth()
