@@ -141,7 +141,7 @@ public class PlayerManager : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void HandleSlideFail()
+    private void HandleSlideFail(bool value)
     {
         ApplyDamage(slideFailDamage);
     }
