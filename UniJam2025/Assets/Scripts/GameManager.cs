@@ -2,6 +2,7 @@ using Assets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Events;
 using UnityEngine.Windows;
 
@@ -36,7 +37,13 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 
-
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip failClip;
+    [SerializeField] private AudioClip clapAudienceClip;
+    [SerializeField] private AudioClip hiFiveAudienceClip;
+    [SerializeField] private AudioClip riseHandsAudienceClip;
+    [SerializeField] private AudioClip changeSlideClip;
 
     private void Awake()
     {
@@ -112,13 +119,16 @@ public class GameManager : MonoBehaviour
 
     private void SlideCompletedSuccessfully(Rule.ActionType input)
     {
-
         timerRunning = false;
 
         Debug.Log("Slide successfully completed.");
 
         StartCoroutine(SuccessfulSlideDelay(input));
 
+        // jouer le son d'audience correspondant au succ s
+        PlayAudienceAudio(input);
+
+        LoadNextSlide();
     }
 
     private void LoadNextSlide()
@@ -256,9 +266,12 @@ public class GameManager : MonoBehaviour
         // Announce that a fail happened
         OnSlideFail?.Invoke(true);
 
+        // play fail audio once at the start of the fail
+        PlayClip(failClip);
+
         simon.ChangeState(SimonState.Walking);
 
-        // Wait for 4 seconds
+        // Wait for failTime seconds
         yield return new WaitForSeconds(failTime);
 
         // Announce that the fail effect is over
@@ -294,5 +307,26 @@ public class GameManager : MonoBehaviour
         LoadNextSlide();
     }
 
+    // Helper functions to play audio
+    private void PlayClip(AudioClip clip)
+    {
+        if (audioSource == null || clip == null) return;
+        audioSource.PlayOneShot(clip);
+    }
 
+    private void PlayAudienceAudio(Rule.ActionType action)
+    {
+        switch (action)
+        {
+            case Rule.ActionType.Clap:
+                PlayClip(clapAudienceClip);
+                break;
+            case Rule.ActionType.HighFive:
+                PlayClip(hiFiveAudienceClip);
+                break;
+            case Rule.ActionType.RaiseHands:
+                PlayClip(riseHandsAudienceClip);
+                break;
+        }
+    }
 }
