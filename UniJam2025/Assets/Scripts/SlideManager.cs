@@ -7,6 +7,14 @@ namespace Assets
 {
     public class SlideManager : MonoBehaviour
     {
+        public float redTextProbabilty = 0.25f;
+        public float blueTextProbabilty = 0.25f;
+
+        public float boldTextProbabilty = 0.5f;
+        public float italicTextProbabilty = 0.25f;
+        public float underlinedTextProbabilty = 0.25f;
+        public float crossedTextProbabilty = 0.05f;
+
         public Textdata textData;
         public Textdata titleData;
 
@@ -16,22 +24,30 @@ namespace Assets
         [SerializeField] private Image image;
 
         [SerializeField] private GameObject ruleSlide;
+        [SerializeField] private TMP_Text ruleSlideText;
 
         private Texture2D[] allImages;
+
+        private int shownTextureIndex = -1;
 
         private void Start()
         {
             allImages = Resources.LoadAll<Texture2D>("SlideImages");
 
-            GenerateSlide();
+            GenerateRuleSlide("helloooo");
         }
 
         public void GenerateSlide()
         {
+            testSlide.SetActive(true);
+            ruleSlide.SetActive(false);
+
             //pull this shit from a json
-            string genText = textData.text[UnityEngine.Random.Range(0, textData.text.Length)];
-            string genTitle = titleData.text[UnityEngine.Random.Range(0, titleData.text.Length)];
-            Texture2D loadedTexture = allImages[UnityEngine.Random.Range(0, allImages.Length)];
+            string genText = StyleString(textData.text[UnityEngine.Random.Range(0, textData.text.Length)]);
+            string genTitle = StyleString("<im>" + titleData.text[UnityEngine.Random.Range(0, titleData.text.Length)] + "</im>");
+
+            shownTextureIndex = UnityEngine.Random.Range(0, allImages.Length);
+            Texture2D loadedTexture = allImages[shownTextureIndex];
 
             slideText.text = genText;
             slideTitle.text = genTitle;
@@ -44,12 +60,78 @@ namespace Assets
         /// <param name="ruleDescription"></param>
         public void GenerateRuleSlide(string ruleDescription)
         {
-            //not implemented yet
+            testSlide.SetActive(false);
+            ruleSlide.SetActive(true);
+
+            ruleSlideText.text = ruleDescription;
         }
 
         public bool IsRuleActive(Rule rule)
         {
-            return false;
+            switch (rule.conditionType)
+            {
+                case Rule.ConditionType.TextRed:
+                    return slideTitle.text.Contains("<color=ff0000>") || slideText.text.Contains("<color=ff0000>");
+                case Rule.ConditionType.TitleUnderlined:
+                    return slideTitle.text.Contains("<u>");
+                case Rule.ConditionType.ImgDiagram:
+                    return shownTextureIndex == 0;
+                default:
+                    return false;
+            }
+        }
+
+        private string StyleString(string s)
+        {
+            int openIndex = s.IndexOf("<im>");
+            if (openIndex == -1)
+                return s;
+
+            int endIndex = s.IndexOf("</im>");
+
+            string start = "";
+            string end = "";
+
+            if (UnityEngine.Random.Range(0f, 1f) <= boldTextProbabilty)
+            {
+                start += "<b>";
+                end += "</b>";
+            }
+            if (UnityEngine.Random.Range(0f, 1f) <= italicTextProbabilty)
+            {
+                start += "<i>";
+                end += "</i>";
+            }
+            if (UnityEngine.Random.Range(0f, 1f) <= crossedTextProbabilty)
+            {
+                start += "<s>";
+                end += "</s>";
+            }
+            if (UnityEngine.Random.Range(0f, 1f) <= underlinedTextProbabilty)
+            {
+                start += "<u>";
+                end += "</u>";
+            }
+
+            {
+                //color selection
+                float colorProb = UnityEngine.Random.Range(0f, 1f);
+                Debug.Log(colorProb);
+                if (colorProb <= redTextProbabilty)
+                {
+                    start += "<color=#ff0000>";
+                    end += "</color>";
+                }
+                else if (colorProb - redTextProbabilty <= blueTextProbabilty)
+                {
+                    start += "<color=#0000ff>";
+                    end += "</color>";
+                }
+            }
+
+            s = s.Substring(0, openIndex) + start + s.Substring(openIndex + 4, endIndex - openIndex - 4) + end + s.Substring(endIndex + 5);
+
+            return StyleString(s);
         }
     }
 }

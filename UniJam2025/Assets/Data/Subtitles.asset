@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: Subtitles
   m_EditorClassIdentifier: Assembly-CSharp::Textdata
   text:
-  - "L\u2019odeur infecte de la Paris Games Week provient en grande partie du manque
-    de douches chez certains visiteurs, dont l\u2019accumulation sur plusieurs jours
-    a transform\xE9 les halls clos en v\xE9ritables chambres de fermentation humaine.
-    Entre chaleur, foule compacte et hygi\xE8ne b\xE2cl\xE9e, l\u2019atmosph\xE8re
-    est vite devenue irrespirable, prouvant qu\u2019un simple passage sous l\u2019eau
-    aurait pu sauver bien des narines."
-  - "Le kebab surpasse le tacos par son \xE9quilibre subtil entre simplicit\xE9 et
-    richesse aromatique : une viande lentement r\xF4tie, juteuse et croustillante,
-    un pain l\xE9ger qui ne s\u2019effondre pas, des l\xE9gumes frais qui apportent
-    du croquant, et surtout une sauce justement dos\xE9e qui met en valeur l\u2019ensemble
-    au lieu de l\u2019\xE9touffer."
+  - "L\u2019<im>odeur infecte</im> de la Paris Games Week provient en grande partie
+    du <im>manque de douches</im> chez certains visiteurs, dont l\u2019accumulation
+    sur plusieurs jours a transform\xE9 les halls clos en v\xE9ritables <im>chambres
+    de fermentation</im>. Entre <im>chaleur \xE9touffante</im>, foule compacte et
+    hygi\xE8ne n\xE9glig\xE9e, l\u2019atmosph\xE8re est vite devenue <im>irrespirable</im>,
+    prouvant qu\u2019un simple passage sous l\u2019eau aurait pu sauver bien des
+    narines."
+  - "Le <im>kebab</im> surpasse le <im>tacos</im> par son <im>\xE9quilibre parfait</im>
+    entre <im>simplicit\xE9</im> et <im>richesse aromatique</im> : une <im>viande
+    r\xF4tie \xE0 la perfection</im>, juteuse et croustillante, un pain l\xE9ger
+    qui ne s\u2019effondre pas, des l\xE9gumes frais qui apportent du croquant, et
+    surtout une <im>sauce ma\xEEtris\xE9e</im> qui sublime l\u2019ensemble au lieu
+    de l\u2019\xE9touffer."
