@@ -30,11 +30,9 @@ namespace Assets
 
         private int shownTextureIndex = -1;
 
-        private void Start()
+        private void Awake()
         {
             allImages = Resources.LoadAll<Texture2D>("SlideImages");
-
-            GenerateRuleSlide("helloooo");
         }
 
         public void GenerateSlide()

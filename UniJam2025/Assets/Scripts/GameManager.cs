@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     private List<Rule.ActionType> requiredActions = new List<Rule.ActionType>();
     private List<Rule.ActionType> pendingActions = new List<Rule.ActionType>();
 
+    public List<Rule> activeRules = new List<Rule>();
+
+
     public SlideManager slideManager;
     public Simon simon;
 
@@ -115,11 +118,21 @@ public class GameManager : MonoBehaviour
         slideCount++;
         Debug.Log("[GameManager] Loading next slide...");
 
-        if (slideCount % 5 == 0)
+        // Every 5 slides -> introduce a new rule
+        if (slideCount % 5 == 1)
         {
-           // slideManager.GenerateRuleSlide();
+            // Generate a new rule (assuming you keep a list called activeRules)
+            Rule newRule = RuleGenerator.GenerateRandomRule(activeRules);
+            activeRules.Add(newRule);
+
+            Debug.Log("[GameManager] New rule generated: " + newRule.description);
+
+            // Tell SlideManager to generate a special "rule slide"
+            slideManager.GenerateRuleSlide(newRule.description);
         }
-        else { 
+        else
+        {
+            // Regular gameplay slide
             slideManager.GenerateSlide();
         }
     }

@@ -45,7 +45,6 @@ public static class RuleGenerator
             Rule.ConditionType.TextRed => "si le texte est rouge",
             Rule.ConditionType.TitleUnderlined => "si le titre est souligné",
             Rule.ConditionType.ImgDiagram => "si le slide montre un diagramme",
-            Rule.ConditionType.SimonTwoArms => "si Simon lève ses deux bras",
             _ => ""
         };
 
