@@ -2,13 +2,13 @@ using Assets;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Windows;
 
 public class GameManager : MonoBehaviour
 {
-    public UnityEvent OnSlideSuccess;
+    public UnityEvent<Rule.ActionType> OnSlideSuccess;
     public UnityEvent OnSlideFail;
 
-    public int health = 50;
 
     private List<Rule.ActionType> requiredActions = new List<Rule.ActionType>();
     private List<Rule.ActionType> pendingActions = new List<Rule.ActionType>();
@@ -85,25 +85,27 @@ public class GameManager : MonoBehaviour
 
             if (pendingActions.Count == 0)
             {
-                SlideCompletedSuccessfully();
+                SlideCompletedSuccessfully(input);
             }
         }
         else
         {
             Debug.Log("Wrong input: " + input);
-            ApplyPenalty();
+
+            OnSlideFail?.Invoke();
+
+            //add coroutine for failure event
         }
     }
 
-    private void SlideCompletedSuccessfully()
+    private void SlideCompletedSuccessfully(Rule.ActionType input)
     {
 
         timerRunning = false;
 
         Debug.Log("Slide successfully completed.");
-        IncreaseHealth();
-        //
-        OnSlideSuccess?.Invoke();
+
+        OnSlideSuccess?.Invoke(input);
 
         LoadNextSlide();
     }
@@ -122,19 +124,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void IncreaseHealth()
-    {
-        health = Mathf.Clamp(health + 10, 0, 100);
-        Debug.Log("Health increased. Current health: " + health);
-    }
-
-    private void ApplyPenalty()
-    {
-        health = Mathf.Clamp(health - 10, 0, 100);
-        Debug.Log("Penalty applied. Current health: " + health);
-
-        OnSlideFail?.Invoke();
-    }
 
     private void StartSlideTimer()
     {
@@ -149,11 +138,12 @@ public class GameManager : MonoBehaviour
     private void SlideFailedDueToTimeout()
     {
         Debug.Log("Slide failed: Time expired.");
-        ApplyPenalty();
 
         if (simon.GetSimonState().Equals("Posing")) {
 
             OnSlideFail?.Invoke();
+
+            //add coroutine for failure event
         }
 
 

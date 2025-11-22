@@ -9,10 +9,13 @@ public class Rule
     public ActionType actionType;
     public int actionAmount;
 
-    public Rule(ConditionType condition, ActionType action, int amount)
+
+    public string description; 
+    public Rule(ConditionType condition, ActionType action, int amount, string description)
     {
-        conditionType = condition;
-        actionType = action;
-        actionAmount = amount;
+        this.conditionType = condition;
+        this.actionType = action;
+        this.actionAmount = amount;
+        this.description = description;
     }
 }
