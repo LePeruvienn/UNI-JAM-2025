@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class AudienceManager : MonoBehaviour
+public class AudienceMember : MonoBehaviour
 {
     [Header("Références")]
     [SerializeField] private Animator animator;

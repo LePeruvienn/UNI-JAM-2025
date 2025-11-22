@@ -343,31 +343,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4015406602532420, guid: a3697e622da90a2469ac69aac663b8c5, type: 3}
-      propertyPath: m_text
-      value: Title :)
-      objectReference: {fileID: 0}
     - target: {fileID: 711020549442399127, guid: a3697e622da90a2469ac69aac663b8c5, type: 3}
       propertyPath: m_Name
       value: SlideCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 4812824403121204594, guid: a3697e622da90a2469ac69aac663b8c5, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 4812824403121204594, guid: a3697e622da90a2469ac69aac663b8c5, type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6643598436530794347, guid: a3697e622da90a2469ac69aac663b8c5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7030455718436014059, guid: a3697e622da90a2469ac69aac663b8c5, type: 3}
-      propertyPath: m_text
-      value: Wow this is default text so cool you should never see this if you're
-        not a developer but oh well i guess the game crashed haha too bad lol maybe
-        try not breaking the game in the future and stop being an idiot
       objectReference: {fileID: 0}
     - target: {fileID: 7618248716388439675, guid: a3697e622da90a2469ac69aac663b8c5, type: 3}
       propertyPath: m_Pivot.x

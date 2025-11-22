@@ -7,16 +7,16 @@ namespace Assets
 {
     public class SlideManager : MonoBehaviour
     {
-        public float redTextProbabilty = 0.25f;
-        public float blueTextProbabilty = 0.25f;
+        [SerializeField, Range(0f, 1f)] private float redTextProbabilty = 0.25f;
+        [SerializeField, Range(0f, 1f)] private float blueTextProbabilty = 0.25f;
 
-        public float boldTextProbabilty = 0.5f;
-        public float italicTextProbabilty = 0.25f;
-        public float underlinedTextProbabilty = 0.25f;
-        public float crossedTextProbabilty = 0.05f;
+        [SerializeField, Range(0f, 1f)] private float boldTextProbabilty = 0.5f;
+        [SerializeField, Range(0f, 1f)] private float italicTextProbabilty = 0.25f;
+        [SerializeField, Range(0f, 1f)] private float underlinedTextProbabilty = 0.25f;
+        [SerializeField, Range(0f, 1f)] private float crossedTextProbabilty = 0.05f;
 
-        public Textdata textData;
-        public Textdata titleData;
+        [SerializeField] private Textdata textData;
+        [SerializeField] private Textdata titleData;
 
         [SerializeField] private GameObject testSlide;
         [SerializeField] private TMP_Text slideText; 
@@ -45,6 +45,7 @@ namespace Assets
             string genTitle = StyleString("<im>" + titleData.text[UnityEngine.Random.Range(0, titleData.text.Length)] + "</im>");
 
             shownTextureIndex = UnityEngine.Random.Range(0, allImages.Length);
+            //Texture2D loadedTexture = allImages[shownTextureIndex];
             Texture2D loadedTexture = allImages[shownTextureIndex];
 
             slideText.text = genText;
@@ -114,7 +115,6 @@ namespace Assets
             {
                 //color selection
                 float colorProb = UnityEngine.Random.Range(0f, 1f);
-                Debug.Log(colorProb);
                 if (colorProb <= redTextProbabilty)
                 {
                     start += "<color=#ff0000>";

@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7618248716388439675}
+  - component: {fileID: 2522842611284358588}
   - component: {fileID: 6855686615259564551}
   - component: {fileID: 8345147385146961945}
   - component: {fileID: 7852854924904442904}
-  - component: {fileID: 2522842611284358588}
   m_Layer: 5
   m_Name: SlideCanvas
   m_TagString: Untagged
@@ -41,6 +41,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2522842611284358588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711020549442399127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d96b8abc5dfa34ca8facc8ea6e13c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.SlideManager
+  redTextProbabilty: 0.1
+  blueTextProbabilty: 0.1
+  boldTextProbabilty: 0.5
+  italicTextProbabilty: 0.25
+  underlinedTextProbabilty: 0.25
+  crossedTextProbabilty: 0.05
+  textData: {fileID: 11400000, guid: 3d18938512ee4a8449c46789c644614e, type: 2}
+  titleData: {fileID: 11400000, guid: a8c6cdd7ea130b541a7944e4da2cd4a7, type: 2}
+  testSlide: {fileID: 4475629794386616738}
+  slideText: {fileID: 7030455718436014059}
+  slideTitle: {fileID: 4015406602532420}
+  image: {fileID: 5937575294075434326}
+  ruleSlide: {fileID: 5685790224879841034}
+  ruleSlideText: {fileID: 4812824403121204594}
 --- !u!223 &6855686615259564551
 Canvas:
   m_ObjectHideFlags: 0
@@ -104,32 +130,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2522842611284358588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 711020549442399127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27d96b8abc5dfa34ca8facc8ea6e13c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Assets.SlideManager
-  redTextProbabilty: 0.1
-  blueTextProbabilty: 0.1
-  boldTextProbabilty: 0.5
-  italicTextProbabilty: 0.25
-  underlinedTextProbabilty: 0.25
-  crossedTextProbabilty: 0.05
-  textData: {fileID: 11400000, guid: 3d18938512ee4a8449c46789c644614e, type: 2}
-  titleData: {fileID: 11400000, guid: a8c6cdd7ea130b541a7944e4da2cd4a7, type: 2}
-  testSlide: {fileID: 4475629794386616738}
-  slideText: {fileID: 7030455718436014059}
-  slideTitle: {fileID: 4015406602532420}
-  image: {fileID: 5937575294075434326}
-  ruleSlide: {fileID: 5685790224879841034}
-  ruleSlideText: {fileID: 4812824403121204594}
 --- !u!1 &1988396790043101882
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,7 +164,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 104.3}
+  m_AnchoredPosition: {x: 0, y: 71}
   m_SizeDelta: {x: 404.1092, y: 31.101}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3398225188953762443
@@ -222,8 +222,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_text: New Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0dbaf9aff10f6cf45b2ca2b32080b14c, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 4978729064763665947, guid: 0dbaf9aff10f6cf45b2ca2b32080b14c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -358,8 +358,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -399,7 +399,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &4475629794386616738
@@ -440,8 +440,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 58}
-  m_SizeDelta: {x: -321.3408, y: -179.5957}
+  m_AnchoredPosition: {x: -6.355774, y: 93.9252}
+  m_SizeDelta: {x: -368.436, y: -251.4504}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4034349105448081614
 CanvasRenderer:
@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
+  m_Color: {r: 0.19215687, g: 0.19215687, b: 0.19215687, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -515,8 +515,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 115.9, y: -21.001}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: 125.06595, y: -17.470917}
+  m_SizeDelta: {x: 123.6682, y: 123.6682}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1127399894305789424
 CanvasRenderer:
@@ -591,8 +591,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 58}
-  m_SizeDelta: {x: -321.3408, y: -179.5957}
+  m_AnchoredPosition: {x: -6.355835, y: 93.9252}
+  m_SizeDelta: {x: -368.43604, y: -251.45041}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &262139484679749817
 CanvasRenderer:
@@ -666,8 +666,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -100, y: -21.001146}
-  m_SizeDelta: {x: 200, y: 158.61}
+  m_AnchoredPosition: {x: -97, y: -16.990011}
+  m_SizeDelta: {x: 157.1528, y: 124.63}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5844000695999498755
 CanvasRenderer:
