@@ -84,14 +84,17 @@ public class GameManager : MonoBehaviour
 
         foreach (var rule in rules)
         {
+            Debug.Log($"Rule: {rule.actionType}, amount: {rule.actionAmount}");
             for (int i = 0; i < rule.actionAmount; i++)
             {
                 actions.Add(rule.actionType);
             }
         }
 
+        Debug.Log("Built actions list: " + string.Join(", ", actions));
         return actions;
     }
+
 
 
     // Called by InputMgr whenever the player presses one of the action buttons
@@ -153,6 +156,16 @@ public class GameManager : MonoBehaviour
         {
             // Apply ALL active rules to the slide
             SetRules(activeRules);
+
+            if (Random.value > 2f/3f)
+            {
+                simon.ChangeState(SimonState.Posing);
+            }
+            else
+            {
+
+                simon.ChangeState(SimonState.Walking);
+            }
 
             slideManager.GenerateSlide();
         }

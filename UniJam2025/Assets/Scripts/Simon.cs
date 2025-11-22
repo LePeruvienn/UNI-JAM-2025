@@ -3,7 +3,7 @@ using UnityEngine;
 public enum SimonState {
 
     Walking,
-    Idle,
+   // Idle,
     Baiting,
     Posing
 }
@@ -19,10 +19,14 @@ public class Simon : MonoBehaviour
     [SerializeField] private float tempoMax = 2f;
 
     [Header("=== CHANCES ===")]
+
+    /*
     [SerializeField, Range(0f, 1f)] private float idleChance = 0.4f;
     [SerializeField, Range(0f, 1f)] private float baitingChance = 0.2f;
     [SerializeField, Range(0f, 1f)] private float poseChance = 0.1f;
+    */
     [SerializeField, Range(0f, 1f)] private float postIdlePoseChance = 0.3f;
+    
 
     [Header("=== POSE SETTINGS ===")]
     [SerializeField] private float poseDurationMin = 1.5f;
@@ -84,7 +88,7 @@ public class Simon : MonoBehaviour
         switch (state)
         {
             case SimonState.Walking: UpdateWalking(); break;
-            case SimonState.Idle: UpdateIdle(); break;
+            //case SimonState.Idle: UpdateIdle(); break;
             case SimonState.Baiting: UpdateBaiting(); break;
             case SimonState.Posing: UpdatePose(); break;
         }
@@ -93,7 +97,7 @@ public class Simon : MonoBehaviour
         {
             tempoTimer = 0f;
             SetNewTempo();
-            EvaluateNextState();
+            //EvaluateNextState();
         }
     }
 
@@ -105,6 +109,7 @@ public class Simon : MonoBehaviour
         currentTempo = Random.Range(tempoMin, tempoMax);
     }
 
+    /*
     private void EvaluateNextState()
     {
         // On n'évalue pas de nouvelle transition si on est déjà dans un état "bloquant"
@@ -138,6 +143,7 @@ public class Simon : MonoBehaviour
         // 4. Continue walking
         ChangeState(SimonState.Walking);
     }
+    */
 
     // ------------------------------
     // STATES
@@ -152,12 +158,12 @@ public class Simon : MonoBehaviour
             case SimonState.Walking:
                 sr.color = baseColor;
                 break;
-
+                /*
             case SimonState.Idle:
                 rb.linearVelocity = Vector2.zero;
                 sr.color = baseColor;
                 break;
-
+                */
             case SimonState.Baiting:
                 rb.linearVelocity = Vector2.zero;
                 sr.color = Color.yellow; // Visualisation de l'état Baiting (peut être ajusté)
@@ -170,7 +176,10 @@ public class Simon : MonoBehaviour
                 poseDuration = Random.Range(poseDurationMin, poseDurationMax);
                 lastPoseTime = Time.time;
                 break;
+
         }
+
+        Debug.Log("Simon state: " +  state);
     }
 
     private void UpdateWalking()
