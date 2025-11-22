@@ -2,127 +2,187 @@ using UnityEngine;
 
 public class Simon : MonoBehaviour
 {
-    private enum SimonState { Idle, Walking, Posing }
+    private enum SimonState { Walking, Idle, Posing }
 
-    [Header("Idle settings")]
-    [SerializeField] private float minIdleDuration = 1f;
-    [SerializeField] private float maxIdleDuration = 3f;
-    [SerializeField] private float idleChance = 0.3f;
+    [Header("=== TEMPO ===")]
+    [SerializeField] private float tempoMin = 1f;
+    [SerializeField] private float tempoMax = 2f;
 
-    [Header("Walk settings")]
+    [Header("=== CHANCES ===")]
+    [SerializeField, Range(0f, 1f)] private float idleChance = 0.4f;
+    [SerializeField, Range(0f, 1f)] private float poseChance = 0.1f;
+    [SerializeField, Range(0f, 1f)] private float postIdlePoseChance = 0.3f;
+
+    [Header("=== POSE SETTINGS ===")]
+    [SerializeField] private float poseDurationMin = 1.5f;
+    [SerializeField] private float poseDurationMax = 3f;
+    [SerializeField] private float poseMinCooldown = 2f;  // Minimum wait before next pose
+    [SerializeField] private float poseMaxCooldown = 6f;  // Maximum wait before forcing next pose
+    [SerializeField] private float poseMaxDuration = 4f;  // Maximum time a single pose can last
+
+    [Header("=== MOVEMENT ===")]
     [SerializeField] private float speed = 2f;
     [SerializeField] private Transform leftBoundary;
     [SerializeField] private Transform rightBoundary;
 
-    [Header("Pose settings")]
-    [SerializeField] private bool canPoseWhileWalking = true;  // active les poses pendant la marche
-    [SerializeField] private float poseChance = 0.1f;          // chance de poser
-    [SerializeField] private float poseDuration = 3f;          // durée de pose
-
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+    private Color baseColor;
 
-    private SimonState state = SimonState.Walking;
-    private float idleTimer;
-    private float poseTimer;
+    private SimonState state;
+    private float tempoTimer;
+    private float currentTempo;
+    private float stateTimer;
+
+    private float poseDuration;
+    private float lastPoseTime = -999f;
     private int direction = 1;
-    private Color normalColor;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        normalColor = sr.color;
+        baseColor = sr.color;
 
         PickRandomDirection();
+        SetNewTempo();
+        ChangeState(SimonState.Walking);
     }
 
     private void Update()
     {
+        tempoTimer += Time.deltaTime;
+        stateTimer += Time.deltaTime;
+
         switch (state)
         {
-            case SimonState.Walking:
-                HandleWalking();
-                break;
+            case SimonState.Walking: UpdateWalking(); break;
+            case SimonState.Idle: UpdateIdle(); break;
+            case SimonState.Posing: UpdatePose(); break;
+        }
 
-            case SimonState.Idle:
-                HandleIdle();
-                break;
-
-            case SimonState.Posing:
-                HandlePosing();
-                break;
+        if (tempoTimer >= currentTempo)
+        {
+            tempoTimer = 0f;
+            SetNewTempo();
+            EvaluateNextState();
         }
     }
 
-    private void HandleWalking()
+    // ------------------------------
+    // TEMPO
+    // ------------------------------
+    private void SetNewTempo()
     {
-        rb.linearVelocity = new Vector2(direction * speed, 0);
+        currentTempo = Random.Range(tempoMin, tempoMax);
+    }
 
-        // Boundaries
-        if (transform.position.x > rightBoundary.position.x && direction == 1)
-            direction = -1;
-        else if (transform.position.x < leftBoundary.position.x && direction == -1)
-            direction = 1;
+    private void EvaluateNextState()
+    {
+        if (state == SimonState.Posing || state == SimonState.Idle) return;
 
-        // Pose possible pendant la marche ?
-        if (canPoseWhileWalking && Random.value < Time.deltaTime * poseChance)
+        float timeSinceLastPose = Time.time - lastPoseTime;
+
+        // Force pose if max cooldown reached
+        if (timeSinceLastPose >= poseMaxCooldown)
         {
-            StartPosing();
+            StartPose();
             return;
         }
 
-        // Possibilité de s'arrêter (idle)
-        if (Random.value < Time.deltaTime * idleChance)
+        // Only allow pose if min cooldown passed
+        if (timeSinceLastPose >= poseMinCooldown && Random.value < poseChance)
         {
-            state = SimonState.Idle;
-            idleTimer = Random.Range(minIdleDuration, maxIdleDuration);
+            StartPose();
+            return;
+        }
 
-            // 🔥 Si pose interdite pendant la marche, on peut poser seulement ici !
-            if (!canPoseWhileWalking && Random.value < poseChance)
+        // Idle check
+        if (Random.value < idleChance)
+        {
+            ChangeState(SimonState.Idle);
+            return;
+        }
+
+        // Continue walking
+        ChangeState(SimonState.Walking);
+    }
+
+    // ------------------------------
+    // STATES
+    // ------------------------------
+    private void ChangeState(SimonState newState)
+    {
+        state = newState;
+        stateTimer = 0f;
+
+        switch (newState)
+        {
+            case SimonState.Walking:
+                sr.color = baseColor;
+                break;
+
+            case SimonState.Idle:
+                rb.linearVelocity = Vector2.zero;
+                sr.color = baseColor;
+                break;
+
+            case SimonState.Posing:
+                rb.linearVelocity = Vector2.zero;
+                sr.color = Color.red;
+                poseDuration = Random.Range(poseDurationMin, poseDurationMax);
+                lastPoseTime = Time.time;
+                break;
+        }
+    }
+
+    private void UpdateWalking()
+    {
+        rb.linearVelocity = new Vector2(direction * speed, 0);
+        HandleBoundaries();
+    }
+
+    private void UpdateIdle()
+    {
+        if (stateTimer >= currentTempo)
+        {
+            float timeSinceLastPose = Time.time - lastPoseTime;
+
+            // Post-idle pose check
+            if (timeSinceLastPose >= poseMaxCooldown || 
+                (timeSinceLastPose >= poseMinCooldown && Random.value < postIdlePoseChance))
             {
-                StartPosing();
+                StartPose();
+                return;
             }
 
-            rb.linearVelocity = Vector2.zero;
+            PickRandomDirection();
+            ChangeState(SimonState.Walking);
         }
     }
 
-    private void HandleIdle()
+    private void StartPose()
     {
-        idleTimer -= Time.deltaTime;
-        if (idleTimer <= 0)
+        ChangeState(SimonState.Posing);
+    }
+
+    private void UpdatePose()
+    {
+        // Enforce max pose duration
+        if (stateTimer >= Mathf.Min(poseDuration, poseMaxDuration))
         {
-            if (Random.value > 0.5f)
-                PickRandomDirection();
-
-            state = SimonState.Walking;
+            PickRandomDirection();
+            ChangeState(SimonState.Walking);
         }
     }
 
-    private void HandlePosing()
+    // ------------------------------
+    // BOUNDARIES
+    // ------------------------------
+    private void HandleBoundaries()
     {
-        poseTimer -= Time.deltaTime;
-        if (poseTimer <= 0)
-        {
-            // Retour en couleur normale
-            sr.color = normalColor;
-
-            // Retour à la marche
-            state = SimonState.Walking;
-        }
-    }
-
-    private void StartPosing()
-    {
-        state = SimonState.Posing;
-
-        poseTimer = poseDuration;
-
-        rb.linearVelocity = Vector2.zero;
-
-        // Simon devient rouge
-        sr.color = Color.red;
+        if (transform.position.x > rightBoundary.position.x) direction = -1;
+        if (transform.position.x < leftBoundary.position.x) direction = 1;
     }
 
     private void PickRandomDirection()

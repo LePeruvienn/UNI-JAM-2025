@@ -247,14 +247,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e35a5c5cdd8676db08784544ae173a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempoMin: 1
+  tempoMax: 2
   idleChance: 0.5
   poseChance: 0.1
-  minTempoDuration: 1
-  maxTempoDuration: 2
+  postIdlePoseChance: 0.3
+  poseDurationMin: 1
+  poseDurationMax: 3
+  poseMinCooldown: 10
+  poseMaxCooldown: 15
+  poseMaxDuration: 4
   speed: 2
-  minWalkDuration: 2
-  minIdleDuration: 2
-  maxIdleDuration: 5
   leftBoundary: {fileID: 1055945232}
   rightBoundary: {fileID: 1718555311}
 --- !u!1 &1055945231
