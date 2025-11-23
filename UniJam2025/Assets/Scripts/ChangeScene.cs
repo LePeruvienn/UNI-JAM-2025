@@ -3,30 +3,27 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    public static ChangeScene Instance;
-
     [Header("Transition")]
     [SerializeField] private Animator transitionAnimator;
     [SerializeField] private float transitionDuration = 1f;
 
+    private static ChangeScene existingInstance;
     private bool changing = false;
 
     private void Awake()
     {
-        // Make this a singleton and avoid duplicates on next scenes
-        if (Instance != null && Instance != this)
+        // If another instance exists, destroy this one
+        if (existingInstance != null && existingInstance != this)
         {
             Destroy(gameObject);
             return;
         }
 
-        Instance = this;
+        // This is the first/only instance
+        existingInstance = this;
         DontDestroyOnLoad(gameObject);
     }
 
-    /// <summary>
-    /// Call this from anywhere: ChangeScene.Instance.Goto("Level2");
-    /// </summary>
     public void Goto(string sceneName)
     {
         if (string.IsNullOrEmpty(sceneName))
