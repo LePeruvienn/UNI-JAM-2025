@@ -131,6 +131,7 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Slide successfully completed.");
 
+        StopAllCoroutines();
         StartCoroutine(SuccessfulSlideDelay(input));
 
         // jouer le son d'audience correspondant au succ s
@@ -155,6 +156,7 @@ public class GameManager : MonoBehaviour
 
             Debug.Log("[GameManager] New rule generated: " + newRule.description);
 
+            StopAllCoroutines();
             StartCoroutine(ShowRuleSlideThenContinue("<u>Nouvelle Regle!</u>\n" + newRule.description));
 
 
@@ -336,8 +338,6 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ShowRuleSlideThenContinue(string description)
     {
-        StopAllCoroutines();
-
         slideManager.GenerateRuleSlide(description);
 
         timerRunning = false; // stop gameplay timer
@@ -350,8 +350,6 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SuccessfulSlideDelay(Rule.ActionType lastInput)
     {
-
-        StopAllCoroutines();
         // invoke success event so audience reacts
         OnSlideSuccess?.Invoke(lastInput);
 

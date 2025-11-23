@@ -56,7 +56,7 @@ MonoBehaviour:
   slideManager: {fileID: 0}
   simon: {fileID: 0}
   showRuleSlideEveryXSlide: 5
-  simonPresentProbability: 0.5
+  simonPresentProbability: 0.7
   timeLimit: 5
   failTime: 7
   successfulSlideDelay: 4
