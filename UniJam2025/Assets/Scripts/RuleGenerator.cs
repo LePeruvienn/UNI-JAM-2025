@@ -43,7 +43,7 @@ public static class RuleGenerator
         string conditionText = condition switch
         {
             Rule.ConditionType.TextRed => "si le texte est rouge",
-            Rule.ConditionType.TitleUnderlined => "si le titre est souligné",
+            Rule.ConditionType.TitleUnderlined => "si le titre est souligne",
             Rule.ConditionType.ImgDiagram => "si le slide montre un diagramme",
             _ => ""
         };
@@ -52,7 +52,7 @@ public static class RuleGenerator
         {
             Rule.ActionType.Clap => "ajoute XXX claps",
             Rule.ActionType.HighFive => "ajoute XXX high-fives",
-            Rule.ActionType.RaiseHands => "ajoute XXX levées des mains",
+            Rule.ActionType.RaiseHands => "ajoute XXX levees des mains",
             _ => ""
         };
 

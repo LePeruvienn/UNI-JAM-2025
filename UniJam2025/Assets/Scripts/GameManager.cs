@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        // If an instance already exists and it’s not this, destroy this object
+        // If an instance already exists and itï¿½s not this, destroy this object
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         LoadNextSlide();
     } 
@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour
 
             Debug.Log("[GameManager] New rule generated: " + newRule.description);
 
-            StartCoroutine(ShowRuleSlideThenContinue(newRule.description));
+            StartCoroutine(ShowRuleSlideThenContinue("<u>Nouvelle Regle!</u>\n" + newRule.description));
 
 
             // RULE SLIDE = no gameplay rules yet
@@ -236,19 +236,19 @@ public class GameManager : MonoBehaviour
 
     public void OnClap()
     {
-      //  Debug.Log("[TestCallback] Reçu : Clap (UI ou clavier). Time=" + Time.time);
+      //  Debug.Log("[TestCallback] Reï¿½u : Clap (UI ou clavier). Time=" + Time.time);
         OnPlayerInput(Rule.ActionType.Clap);
     }
 
     public void OnHiFive()
     {
-       // Debug.Log("[TestCallback] Reçu : HiFive (UI ou clavier). Time=" + Time.time);
+       // Debug.Log("[TestCallback] Reï¿½u : HiFive (UI ou clavier). Time=" + Time.time);
         OnPlayerInput(Rule.ActionType.HighFive);
     }
 
     public void OnRiseHands()
     {
-       // Debug.Log("[TestCallback] Reçu : RiseHands (UI ou clavier). Time=" + Time.time);
+       // Debug.Log("[TestCallback] Reï¿½u : RiseHands (UI ou clavier). Time=" + Time.time);
         OnPlayerInput(Rule.ActionType.RaiseHands);
     }
 
@@ -303,9 +303,9 @@ public class GameManager : MonoBehaviour
         // play fail audio once at the start of the fail
         PlayClip(failClip);
 
-        string failedRulesDescription = "";
+        string failedRulesDescription = "Fail !\nVoici toutes les regles:\n";
 
-        foreach (Rule.ActionType actionType in Enum.GetValues(typeof(Rule.ActionType)))
+        /*foreach (Rule.ActionType actionType in Enum.GetValues(typeof(Rule.ActionType)))
         {
             if (pendingActions.Contains(actionType))
             {
@@ -315,7 +315,10 @@ public class GameManager : MonoBehaviour
                         failedRulesDescription += r.description + '\n';
                 }
             }
-        }
+        }*/
+
+        foreach(Rule r in activeRules)
+            failedRulesDescription += r.description + '\n';
 
         simon.ChangeState(SimonState.Walking);
         slideManager.GenerateRuleSlide(failedRulesDescription);
