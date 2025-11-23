@@ -37,6 +37,7 @@ public class ChangeScene : MonoBehaviour
 
     private System.Collections.IEnumerator LoadSceneWithTransition(string sceneName)
     {
+        Debug.Log($"Changing scene to {sceneName} : changing = {changing}");
         if (changing)
             yield break;
 
