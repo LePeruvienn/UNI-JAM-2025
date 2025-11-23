@@ -317,7 +317,7 @@ public class GameManager : MonoBehaviour
             }
         }*/
 
-        foreach(Rule r in activeRules)
+        foreach(Rule r in presentedRules)
             failedRulesDescription += r.description + '\n';
 
         simon.ChangeState(SimonState.Walking);

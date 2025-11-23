@@ -7,8 +7,9 @@ namespace Assets
 {
     public class SlideManager : MonoBehaviour
     {
-        [SerializeField, Range(0f, 1f)] private float redTextProbabilty = 0.25f;
-        [SerializeField, Range(0f, 1f)] private float blueTextProbabilty = 0.25f;
+        [SerializeField, Range(0f, 1f)] private float redTextProbabilty = 0.2f;
+        [SerializeField, Range(0f, 1f)] private float blueTextProbabilty = 0.2f;
+        [SerializeField, Range(0f, 1f)] private float yellowTextProbabilty = 0.1f;
 
         [SerializeField, Range(0f, 1f)] private float boldTextProbabilty = 0.5f;
         [SerializeField, Range(0f, 1f)] private float italicTextProbabilty = 0.25f;
@@ -71,10 +72,16 @@ namespace Assets
             {
                 case Rule.ConditionType.TextRed:
                     return slideTitle.text.Contains("color=#ff0000") || slideText.text.Contains("color=#ff0000");
+                case Rule.ConditionType.TextBlue:
+                    return slideTitle.text.Contains("color=#0000ff") || slideText.text.Contains("color=#0000ff");
+                case Rule.ConditionType.TextYellow:
+                    return slideTitle.text.Contains("color=#ffff00") || slideText.text.Contains("color=#ffff00");
                 case Rule.ConditionType.TitleUnderlined:
                     return slideTitle.text.Contains("<u>");
                 case Rule.ConditionType.ImgDiagram:
                     return allImages[shownTextureIndex].name.Contains("graph");
+                case Rule.ConditionType.ImgAnimal:
+                    return allImages[shownTextureIndex].name.Contains("animal");
                 default:
                     return false;
             }
@@ -123,6 +130,11 @@ namespace Assets
                 else if (colorProb - redTextProbabilty <= blueTextProbabilty)
                 {
                     start += "<color=#0000ff>";
+                    end += "</color>";
+                }
+                else if (colorProb - redTextProbabilty - blueTextProbabilty <= yellowTextProbabilty)
+                {
+                    start += "<color=#ffff00>";
                     end += "</color>";
                 }
             }

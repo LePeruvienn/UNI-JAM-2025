@@ -43,8 +43,11 @@ public static class RuleGenerator
         string conditionText = condition switch
         {
             Rule.ConditionType.TextRed => "si le texte est rouge",
+            Rule.ConditionType.TextBlue => "si le texte est bleu",
+            Rule.ConditionType.TextYellow => "si le texte est jaune",
             Rule.ConditionType.TitleUnderlined => "si le titre est souligne",
-            Rule.ConditionType.ImgDiagram => "si le slide montre un diagramme",
+            Rule.ConditionType.ImgDiagram => "si l'image est un diagramme",
+            Rule.ConditionType.ImgAnimal => "Si l'image est un animal REEL",
             _ => ""
         };
 

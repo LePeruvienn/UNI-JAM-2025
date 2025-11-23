@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Rule
 {
-    public enum ConditionType { TextRed, TitleUnderlined, ImgDiagram }
+    public enum ConditionType { TextRed, TextBlue, TextYellow, TitleUnderlined, ImgDiagram, ImgAnimal }
     public enum ActionType { Clap, HighFive, RaiseHands }
 
     public ConditionType conditionType;
