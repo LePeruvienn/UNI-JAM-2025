@@ -15,6 +15,13 @@ public class Audience : MonoBehaviour
 
     [SerializeField] private string failBoolParameter = "Fail";
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip failClip;
+    [SerializeField] private AudioClip clapClip;
+    [SerializeField] private AudioClip hiFiveClip;
+    [SerializeField] private AudioClip riseHandsClip;
+
     private UnityAction<Rule.ActionType> _successListener;
     private UnityAction<bool> _failListener;
 
@@ -22,6 +29,9 @@ public class Audience : MonoBehaviour
     {
         if (animator == null)
             animator = GetComponent<Animator>();
+
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -60,12 +70,15 @@ public class Audience : MonoBehaviour
             {
                 case Rule.ActionType.Clap:
                     animator.SetTrigger(clapSuccessTrigger);
+                    PlayClip(clapClip);
                     break;
                 case Rule.ActionType.HighFive:
                     animator.SetTrigger(hiFiveSuccessTrigger);
+                    PlayClip(hiFiveClip);
                     break;
                 case Rule.ActionType.RaiseHands:
                     animator.SetTrigger(riseHandsSuccessTrigger);
+                    PlayClip(riseHandsClip);
                     break;
                 default:
                     Debug.LogWarning("[AudienceManager] Action inconnue reçue pour success: " + action);
@@ -76,6 +89,18 @@ public class Audience : MonoBehaviour
         else
         {
             Debug.LogWarning("[AudienceManager] Animator manquant — impossible d'afficher l'animation de succès.");
+            switch (action)
+            {
+                case Rule.ActionType.Clap:
+                    PlayClip(clapClip);
+                    break;
+                case Rule.ActionType.HighFive:
+                    PlayClip(hiFiveClip);
+                    break;
+                case Rule.ActionType.RaiseHands:
+                    PlayClip(riseHandsClip);
+                    break;
+            }
         }
     }
 
@@ -84,7 +109,18 @@ public class Audience : MonoBehaviour
         if (animator != null)
         {
             animator.SetBool(failBoolParameter, isAnimActive);
+            if (isAnimActive)
+                PlayClip(failClip);
             return;
         }
+
+        if (isAnimActive)
+            PlayClip(failClip);
+    }
+
+    private void PlayClip(AudioClip clip)
+    {
+        if (audioSource == null || clip == null) return;
+        audioSource.PlayOneShot(clip);
     }
 }
