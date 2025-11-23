@@ -359,6 +359,89 @@ RectTransform:
   m_AnchoredPosition: {x: 960, y: 540}
   m_SizeDelta: {x: 799.99994, y: 449.99997}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!21 &273042061
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: radialSegmentedHealthBarInstance
+  m_Shader: {fileID: -6465566751694194690, guid: 754db91c7cf454b4a937cbe5f4a0a40b, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - EMPTY_NOISE_ON
+  - ETC1_EXTERNAL_ALPHA
+  - PULSATE_WHEN_LOW_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - CONTENT_NOISE: 0
+    - EMPTY_NOISE: 1
+    - OVERLAY_NOISE: 0
+    - PULSATE_WHEN_LOW: 1
+    - Vector1_5F1B012: 59.6
+    - Vector1_ECC2C9F3: 5.5
+    - Vector1_F9D53FA9: 0
+    - _BorderSpacing: 0.02
+    - _BorderWidth: 0.02
+    - _ContentNoiseScale: 100
+    - _ContentNoiseStrength: 0.2
+    - _EmptyNoiseScale: 100
+    - _EmptyNoiseStrength: 0.5
+    - _LineWidth: 0.129
+    - _OverlayNoiseScale: 100
+    - _OverlayNoiseStrength: 0.5
+    - _PulseActivationThreshold: 0.5
+    - _PulseSpeed: 10
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _Radius: 0.284
+    - _RemoveBorder: 0.5
+    - _RemoveSegments: 0
+    - _Rotation: 0
+    - _SecondRemoveSegments: 0.5
+    - _SegmentCount: 5
+    - _SegmentSpacing: 0.04
+    m_Colors:
+    - _BorderColor: {r: 2, g: 2, b: 2, a: 1}
+    - _Color: {r: 0, g: 1, b: 0.09589815, a: 0}
+    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyColor: {r: 0.3584906, g: 0.3466536, b: 0.3466536, a: 1}
+    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _SecondColor: {r: 0.3962264, g: 0.1140085, b: 0.1140085, a: 1}
+    - _SpaceColor: {r: 0.990566, g: 0.546268, b: 0, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &302542639
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -434,11 +517,15 @@ PrefabInstance:
     - target: {fileID: 9127371378937165611, guid: ba70c75870e02904d940b8f85bb7ab3f, type: 3}
       propertyPath: clapClip
       value: 
-      objectReference: {fileID: 8300000, guid: 6594d0f079e448c4895646220ab3e733, type: 3}
+      objectReference: {fileID: 8300000, guid: a6fb2fbdbddcb48549e2bae5e5564cc5, type: 3}
     - target: {fileID: 9127371378937165611, guid: ba70c75870e02904d940b8f85bb7ab3f, type: 3}
       propertyPath: failClip
       value: 
       objectReference: {fileID: 8300000, guid: a1a027eb68bc67c45bb4d10795235259, type: 3}
+    - target: {fileID: 9127371378937165611, guid: ba70c75870e02904d940b8f85bb7ab3f, type: 3}
+      propertyPath: failVolume
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 9127371378937165611, guid: ba70c75870e02904d940b8f85bb7ab3f, type: 3}
       propertyPath: hiFiveClip
       value: 
@@ -446,7 +533,7 @@ PrefabInstance:
     - target: {fileID: 9127371378937165611, guid: ba70c75870e02904d940b8f85bb7ab3f, type: 3}
       propertyPath: audioSource
       value: 
-      objectReference: {fileID: 790817023}
+      objectReference: {fileID: 0}
     - target: {fileID: 9127371378937165611, guid: ba70c75870e02904d940b8f85bb7ab3f, type: 3}
       propertyPath: gameManager
       value: 
@@ -458,10 +545,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9068733003321547715, guid: ba70c75870e02904d940b8f85bb7ab3f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 790817023}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba70c75870e02904d940b8f85bb7ab3f, type: 3}
 --- !u!114 &363049563 stripped
 MonoBehaviour:
@@ -1061,108 +1145,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 732883878}
   m_CullTransparentMesh: 1
---- !u!1 &790817018 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9068733003321547715, guid: ba70c75870e02904d940b8f85bb7ab3f, type: 3}
-  m_PrefabInstance: {fileID: 302542639}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &790817023
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 790817018}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &801566451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1710,89 +1692,6 @@ CanvasRenderer:
   m_GameObject: {fileID: 1030276723}
   m_CullTransparentMesh: 1
 --- !u!21 &1064828288
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: radialSegmentedHealthBarInstance
-  m_Shader: {fileID: -6465566751694194690, guid: 754db91c7cf454b4a937cbe5f4a0a40b, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords:
-  - EMPTY_NOISE_ON
-  - ETC1_EXTERNAL_ALPHA
-  - PULSATE_WHEN_LOW_ON
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses:
-  - MOTIONVECTORS
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - CONTENT_NOISE: 0
-    - EMPTY_NOISE: 1
-    - OVERLAY_NOISE: 0
-    - PULSATE_WHEN_LOW: 1
-    - Vector1_5F1B012: 59.6
-    - Vector1_ECC2C9F3: 5.5
-    - Vector1_F9D53FA9: 0
-    - _BorderSpacing: 0.02
-    - _BorderWidth: 0.02
-    - _ContentNoiseScale: 100
-    - _ContentNoiseStrength: 0.2
-    - _EmptyNoiseScale: 100
-    - _EmptyNoiseStrength: 0.5
-    - _LineWidth: 0.129
-    - _OverlayNoiseScale: 100
-    - _OverlayNoiseStrength: 0.5
-    - _PulseActivationThreshold: 0.5
-    - _PulseSpeed: 10
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    - _Radius: 0.284
-    - _RemoveBorder: 0.5
-    - _RemoveSegments: 0
-    - _Rotation: 0
-    - _SecondRemoveSegments: 0.5
-    - _SegmentCount: 5
-    - _SegmentSpacing: 0.04
-    m_Colors:
-    - _BorderColor: {r: 2, g: 2, b: 2, a: 1}
-    - _Color: {r: 0, g: 1, b: 0.09589815, a: 0}
-    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyColor: {r: 0.3584906, g: 0.3466536, b: 0.3466536, a: 1}
-    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _SecondColor: {r: 0.3962264, g: 0.1140085, b: 0.1140085, a: 1}
-    - _SpaceColor: {r: 0.990566, g: 0.546268, b: 0, a: 0}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
---- !u!21 &1253011346
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -2539,11 +2438,11 @@ PrefabInstance:
     - target: {fileID: 4103096961762186126, guid: f4fb7521832bb7c46b278c1011efa7ee, type: 3}
       propertyPath: clapClip
       value: 
-      objectReference: {fileID: 8300000, guid: 935ece924be792842aa8677dea83ecfe, type: 3}
+      objectReference: {fileID: 8300000, guid: b1fd1802ad10846faafe3d0a687b6d0b, type: 3}
     - target: {fileID: 4103096961762186126, guid: f4fb7521832bb7c46b278c1011efa7ee, type: 3}
       propertyPath: hiFiveClip
       value: 
-      objectReference: {fileID: 8300000, guid: 935ece924be792842aa8677dea83ecfe, type: 3}
+      objectReference: {fileID: 8300000, guid: 155a88c70fe1c4eb9b2835b041500d82, type: 3}
     - target: {fileID: 4103096961762186126, guid: f4fb7521832bb7c46b278c1011efa7ee, type: 3}
       propertyPath: audioSource
       value: 
@@ -2555,7 +2454,7 @@ PrefabInstance:
     - target: {fileID: 4103096961762186126, guid: f4fb7521832bb7c46b278c1011efa7ee, type: 3}
       propertyPath: riseHandsClip
       value: 
-      objectReference: {fileID: 8300000, guid: 63bbb6f6f40ff3447ac11969f482dd54, type: 3}
+      objectReference: {fileID: 8300000, guid: 02a102f4cf54846c8b0bbc4829fabef4, type: 3}
     - target: {fileID: 4103096961762186126, guid: f4fb7521832bb7c46b278c1011efa7ee, type: 3}
       propertyPath: onHealed.m_PersistentCalls.m_Calls.Array.size
       value: 1

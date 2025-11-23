@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class Audience : MonoBehaviour
 {
-    [Header("Références")]
+    [Header("Rï¿½fï¿½rences")]
     [SerializeField] private Animator animator;
     [SerializeField] private GameManager gameManager;
 
@@ -17,6 +17,8 @@ public class Audience : MonoBehaviour
     [SerializeField] private string failBoolParameter = "Fail";
 
     [Header("Audio")]
+    [SerializeField, Range(0f, 1f)] private float audienceReactionVolume = 1f;
+    [SerializeField, Range(0f, 1f)] private float failVolume = 0.3f;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip failClip;
     [SerializeField] private AudioClip clapClip;
@@ -46,7 +48,7 @@ public class Audience : MonoBehaviour
 
         if (gameManager == null)
         {
-            Debug.LogWarning("[AudienceManager] GameManager introuvable : impossible de s'abonner aux événements.");
+            Debug.LogWarning("[AudienceManager] GameManager introuvable : impossible de s'abonner aux ï¿½vï¿½nements.");
             return;
         }
 
@@ -94,14 +96,14 @@ public class Audience : MonoBehaviour
                     PlayClip(riseHandsClip);
                     break;
                 default:
-                    Debug.LogWarning("[AudienceManager] Action inconnue reçue pour success: " + action);
+                    Debug.LogWarning("[AudienceManager] Action inconnue reï¿½ue pour success: " + action);
                     break;
             }
             return;
         }
         else
         {
-            Debug.LogWarning("[AudienceManager] Animator manquant — impossible d'afficher l'animation de succès.");
+            Debug.LogWarning("[AudienceManager] Animator manquant ï¿½ impossible d'afficher l'animation de succï¿½s.");
             switch (action)
             {
                 case Rule.ActionType.Clap:
@@ -162,6 +164,12 @@ public class Audience : MonoBehaviour
                 }
             }
         }
+
+        //Adjust volume
+        if(clip == clapClip || clip == hiFiveClip || clip == riseHandsClip)
+            audioSource.volume = audienceReactionVolume;
+        else if(clip == failClip)
+            audioSource.volume = failVolume;
 
         // Play requested clip
         audioSource.PlayOneShot(clip);

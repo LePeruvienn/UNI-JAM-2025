@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     private float slideTimer = 0f;
     private bool timerRunning = false;
 
-    public int showRuleSlideEveryXSlide = 5;
+    public int showRuleSlideEveryXSlide = 7;
     public float simonPresentProbability = 0.5f;
     public float timeLimit = 5f;
     public float failTime = 4f;
@@ -272,6 +272,7 @@ public class GameManager : MonoBehaviour
     public void TriggerFail()
     {
         timerRunning = false;
+        slideTimer = failTime;
         requiredActions.Clear();
         pendingActions.Clear();
 
