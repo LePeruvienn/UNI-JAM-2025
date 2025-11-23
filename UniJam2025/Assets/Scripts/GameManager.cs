@@ -1,10 +1,12 @@
 using Assets;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
 using UnityEngine.Windows;
+using static Unity.Collections.Unicode;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,7 +19,7 @@ public class GameManager : MonoBehaviour
     private List<Rule.ActionType> requiredActions = new List<Rule.ActionType>();
     private List<Rule.ActionType> pendingActions = new List<Rule.ActionType>();
 
-    public List<Rule> activeRules = new List<Rule>();
+    public List<Rule> presentedRules = new List<Rule>();
 
 
     public SlideManager slideManager;
@@ -137,12 +139,12 @@ public class GameManager : MonoBehaviour
     private void LoadNextSlide()
     {
         slideCount++;
-        Debug.Log("[GameManager] Loading next slide...");
+        //Debug.Log("[GameManager] Loading next slide...");
 
         if (slideCount % 5 == 1)
         {
-            Rule newRule = RuleGenerator.GenerateRandomRule(activeRules);
-            activeRules.Add(newRule);
+            Rule newRule = RuleGenerator.GenerateRandomRule(presentedRules);
+            presentedRules.Add(newRule);
 
             Debug.Log("[GameManager] New rule generated: " + newRule.description);
 
@@ -154,10 +156,22 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+
+            List<Rule> activeRules = new List<Rule>();
+
+            if (simon.GetSimonState() == SimonState.Posing)
+            {
+                foreach (var rule in presentedRules)
+                {
+                    activeRules.Add(rule);
+                }
+            }
+
+            
             // Apply ALL active rules to the slide
             SetRules(activeRules);
 
-            if (Random.value > 2f/3f)
+            if (Random.value > 0)
             {
                 simon.ChangeState(SimonState.Posing);
             }
@@ -302,8 +316,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         // Now load the next *gameplay* slide
-        SetRules(activeRules);
-        slideManager.GenerateSlide();
+        LoadNextSlide();
         StartSlideTimer();
     }
 
