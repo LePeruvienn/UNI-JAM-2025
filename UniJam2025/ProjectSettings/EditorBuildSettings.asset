@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu 1.unity
     guid: aa82737d447bf61e6bb7912105662808
   - enabled: 1
+    path: Assets/Scenes/AmazighScene.unity
+    guid: dc122275c6c8ac34cbfe5ed9c93ce0e4
+  - enabled: 0
     path: Assets/Scenes/Fares2.unity
     guid: ab88a5bead041b648b4612be6d9af28a
   m_configObjects:

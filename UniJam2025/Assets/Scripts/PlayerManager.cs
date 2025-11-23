@@ -23,7 +23,6 @@ public class PlayerManager : MonoBehaviour
     [Header("Evénements")]
     public UnityEvent onDamaged;
     public UnityEvent onHealed;
-    public UnityEvent onDead;
 
     private void Awake()
     {
@@ -115,7 +114,7 @@ public class PlayerManager : MonoBehaviour
     private void Die()
     {
         Debug.Log("[PlayerManager] Mort détectée.");
-        onDead?.Invoke();
+        GameObject.FindAnyObjectByType<ChangeScene>()?.Goto("Main Menu");
 
         gameObject.SetActive(false);
     }
