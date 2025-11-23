@@ -9,6 +9,8 @@ public class ChangeScene : MonoBehaviour
     [SerializeField] private Animator transitionAnimator;
     [SerializeField] private float transitionDuration = 1f;
 
+    private bool changing = false;
+
     private void Awake()
     {
         // Make this a singleton and avoid duplicates on next scenes
@@ -38,6 +40,11 @@ public class ChangeScene : MonoBehaviour
 
     private System.Collections.IEnumerator LoadSceneWithTransition(string sceneName)
     {
+        if (changing)
+            yield break;
+
+        changing = true;
+
         // Play close animation
         if (transitionAnimator != null)
             transitionAnimator.SetTrigger("Close");
@@ -54,6 +61,8 @@ public class ChangeScene : MonoBehaviour
         // Play open animation
         if (transitionAnimator != null)
             transitionAnimator.SetTrigger("Open");
+
+        changing = false;
     }
 }
 
