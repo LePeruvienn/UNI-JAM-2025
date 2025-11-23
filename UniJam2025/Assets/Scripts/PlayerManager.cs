@@ -10,9 +10,6 @@ public class PlayerManager : MonoBehaviour
 
     [Header("Animation / Sprite")]
     [SerializeField] private Animator animator;
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Color flashColor = Color.white;
-    [SerializeField] private float flashDuration = 0.08f;
 
     [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
@@ -33,9 +30,6 @@ public class PlayerManager : MonoBehaviour
         if (animator == null)
             animator = GetComponent<Animator>();
 
-        if (spriteRenderer == null)
-            spriteRenderer = GetComponent<SpriteRenderer>();
-
         if (audioSource == null)
             audioSource = GetComponent<AudioSource>();
 
@@ -44,13 +38,11 @@ public class PlayerManager : MonoBehaviour
 
     private void OnEnable()
     {
-        // résout la référence au GameManager si nécessaire
         if (gameManager == null)
             gameManager = FindAnyObjectByType<GameManager>();
 
         if (gameManager != null)
         {
-            // GameManager expose des UnityEvent : utiliser AddListener / RemoveListener
             gameManager.OnSlideFail?.AddListener(HandleSlideFail);
             gameManager.OnSlideSuccess?.AddListener(HandleSlideSuccess);
         }
@@ -91,22 +83,13 @@ public class PlayerManager : MonoBehaviour
             animator.ResetTrigger(animatorTrigger);
             animator.SetTrigger(animatorTrigger);
         }
-        else if (spriteRenderer != null)
+        else
         {
-            StartCoroutine(FlashSprite());
+            Debug.LogWarning($"[PlayerManager] Animator manquant : impossible de jouer l'animation '{animatorTrigger}'.");
         }
 
         if (audioSource != null && clip != null)
             audioSource.PlayOneShot(clip);
-    }
-
-    private IEnumerator FlashSprite()
-    {
-        if (spriteRenderer == null) yield break;
-        var original = spriteRenderer.color;
-        spriteRenderer.color = flashColor;
-        yield return new WaitForSeconds(flashDuration);
-        spriteRenderer.color = original;
     }
 
     public void ApplyDamage()

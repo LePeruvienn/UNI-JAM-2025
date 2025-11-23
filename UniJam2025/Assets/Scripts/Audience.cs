@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class AudienceMember : MonoBehaviour
+public class Audience : MonoBehaviour
 {
     [Header("Références")]
     [SerializeField] private Animator animator;
@@ -35,7 +35,6 @@ public class AudienceMember : MonoBehaviour
             return;
         }
 
-        // Préparer listeners pour pouvoir les retirer proprement
         _successListener = new UnityAction<Rule.ActionType>(HandleSlideSuccess);
         _failListener = new UnityAction<bool>(HandleSlideFail);
 
@@ -55,37 +54,37 @@ public class AudienceMember : MonoBehaviour
 
     private void HandleSlideSuccess(Rule.ActionType action)
     {
-        if (animator == null)
+        if (animator != null)
         {
-            Debug.LogWarning("[AudienceManager] Animator non défini — impossible de jouer l'animation de succès.");
+            switch (action)
+            {
+                case Rule.ActionType.Clap:
+                    animator.SetTrigger(clapSuccessTrigger);
+                    break;
+                case Rule.ActionType.HighFive:
+                    animator.SetTrigger(hiFiveSuccessTrigger);
+                    break;
+                case Rule.ActionType.RaiseHands:
+                    animator.SetTrigger(riseHandsSuccessTrigger);
+                    break;
+                default:
+                    Debug.LogWarning("[AudienceManager] Action inconnue reçue pour success: " + action);
+                    break;
+            }
             return;
         }
-
-        switch (action)
+        else
         {
-            case Rule.ActionType.Clap:
-                animator.SetTrigger(clapSuccessTrigger);
-                break;
-            case Rule.ActionType.HighFive:
-                animator.SetTrigger(hiFiveSuccessTrigger);
-                break;
-            case Rule.ActionType.RaiseHands:
-                animator.SetTrigger(riseHandsSuccessTrigger);
-                break;
-            default:
-                Debug.LogWarning("[AudienceManager] Action inconnue reçue pour success: " + action);
-                break;
+            Debug.LogWarning("[AudienceManager] Animator manquant — impossible d'afficher l'animation de succès.");
         }
     }
 
     private void HandleSlideFail(bool isAnimActive)
     {
-        if (animator == null)
+        if (animator != null)
         {
-            Debug.LogWarning("[AudienceManager] Animator non défini — impossible de jouer l'animation d'échec.");
+            animator.SetBool(failBoolParameter, isAnimActive);
             return;
         }
-
-        animator.SetBool(failBoolParameter, isAnimActive);
     }
 }
