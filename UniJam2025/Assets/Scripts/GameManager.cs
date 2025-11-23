@@ -288,7 +288,7 @@ public class GameManager : MonoBehaviour
     {
         // Announce that a fail happened
         OnSlideFail?.Invoke(true);
-        simon.ChangeState(SimonState.Idle);
+        simon.LockState(SimonState.Idle);
 
         string failedRulesDescription = "Fail !\nVoici toutes les regles:\n";
 
@@ -307,7 +307,7 @@ public class GameManager : MonoBehaviour
         foreach(Rule r in presentedRules)
             failedRulesDescription += r.description + '\n';
 
-        simon.ChangeState(SimonState.Walking);
+        simon.UnLockState(SimonState.Walking);
         slideManager.GenerateRuleSlide(failedRulesDescription);
 
         // Wait for failTime seconds
