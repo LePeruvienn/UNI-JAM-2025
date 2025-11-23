@@ -10,7 +10,7 @@ public enum SimonState {
 public class Simon : MonoBehaviour
 {
     [Header("Tempo settings")]
-    [SerializeField] private float tempoDuration = 1f;
+    //[SerializeField] private float tempoDuration = 1f;
 
     [Header("Idle settings")]
     [SerializeField] private float minIdleDuration = 1f;

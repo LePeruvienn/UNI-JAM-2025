@@ -56,6 +56,6 @@ public static class RuleGenerator
             _ => ""
         };
 
-        return $"• {conditionText}, {actionText} {amount} fois.";
+        return $" {conditionText}, {actionText} {amount} fois.";
     }
 }

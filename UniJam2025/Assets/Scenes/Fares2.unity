@@ -416,6 +416,12 @@ MonoBehaviour:
   simon: {fileID: 1331143865}
   timeLimit: 5
   failTime: 4
+  audioSource: {fileID: 0}
+  failClip: {fileID: 0}
+  clapAudienceClip: {fileID: 0}
+  hiFiveAudienceClip: {fileID: 0}
+  riseHandsAudienceClip: {fileID: 0}
+  changeSlideClip: {fileID: 0}
 --- !u!1001 &426306602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1150,11 +1156,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8667070477132173168, guid: 2195ffc23e1eb9b4f89ee4123e569073, type: 3}
       propertyPath: m_LocalScale.x
-      value: 150
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 8667070477132173168, guid: 2195ffc23e1eb9b4f89ee4123e569073, type: 3}
       propertyPath: m_LocalScale.y
-      value: 150
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 8667070477132173168, guid: 2195ffc23e1eb9b4f89ee4123e569073, type: 3}
       propertyPath: m_LocalScale.z

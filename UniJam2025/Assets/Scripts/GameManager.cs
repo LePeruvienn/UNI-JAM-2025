@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
 
         foreach (var rule in rules)
         {
-            Debug.Log($"Rule: {rule.actionType}, amount: {rule.actionAmount}");
+           // Debug.Log($"Rule: {rule.actionType}, amount: {rule.actionAmount}");
             for (int i = 0; i < rule.actionAmount; i++)
             {
                 actions.Add(rule.actionType);
@@ -102,12 +102,12 @@ public class GameManager : MonoBehaviour
     // Called by InputMgr whenever the player presses one of the action buttons
     public void OnPlayerInput(Rule.ActionType input)
     {
-        Debug.Log("[GameManager] Player input: " + input);
+       Debug.Log("[GameManager] Player input: " + input);
 
-        if (pendingActions.Contains(input) && simon.GetSimonState().Equals("Posing")) //add simon active check
+        if (pendingActions.Contains(input) && simon.GetSimonState() == SimonState.Posing) //add simon active check
         {
             pendingActions.Remove(input);
-            Debug.Log("Correct input: " + input);
+          //  Debug.Log("Correct input: " + input);
 
             if (pendingActions.Count == 0)
             {
@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Wrong input: " + input);
+        //    Debug.Log("Wrong input: " + input);
 
             TriggerFail();
         }
@@ -141,6 +141,10 @@ public class GameManager : MonoBehaviour
         slideCount++;
         //Debug.Log("[GameManager] Loading next slide...");
 
+
+        requiredActions.Clear();
+        pendingActions.Clear();
+
         if (slideCount % 5 == 1)
         {
             Rule newRule = RuleGenerator.GenerateRandomRule(presentedRules);
@@ -156,34 +160,27 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-
+            // Build active rules BEFORE calling SetRules()
             List<Rule> activeRules = new List<Rule>();
 
-            if (simon.GetSimonState() == SimonState.Posing)
+            foreach (var rule in presentedRules)
             {
-                foreach (var rule in presentedRules)
-                {
-                    activeRules.Add(rule);
-                }
+                activeRules.Add(rule);
             }
 
-            
-            // Apply ALL active rules to the slide
+            // Now correctly build player tasks
             SetRules(activeRules);
 
-            if (Random.value > 0)
-            {
+            // Choose Simon state
+            if (Random.value > 0.5f)
                 simon.ChangeState(SimonState.Posing);
-            }
             else
-            {
-
                 simon.ChangeState(SimonState.Walking);
-            }
 
             slideManager.GenerateSlide();
         }
     }
+    
 
 
 
@@ -194,7 +191,7 @@ public class GameManager : MonoBehaviour
             slideTimer = timeLimit;
             timerRunning = true;
         }
-        Debug.Log("[GameManager] Timer started: " + slideTimer + " seconds");
+       // Debug.Log("[GameManager] Timer started: " + slideTimer + " seconds");
     }
 
     private void SlideFailedDueToTimeout()
@@ -227,19 +224,19 @@ public class GameManager : MonoBehaviour
 
     public void OnClap()
     {
-        Debug.Log("[TestCallback] Reçu : Clap (UI ou clavier). Time=" + Time.time);
+      //  Debug.Log("[TestCallback] Reçu : Clap (UI ou clavier). Time=" + Time.time);
         OnPlayerInput(Rule.ActionType.Clap);
     }
 
     public void OnHiFive()
     {
-        Debug.Log("[TestCallback] Reçu : HiFive (UI ou clavier). Time=" + Time.time);
+       // Debug.Log("[TestCallback] Reçu : HiFive (UI ou clavier). Time=" + Time.time);
         OnPlayerInput(Rule.ActionType.HighFive);
     }
 
     public void OnRiseHands()
     {
-        Debug.Log("[TestCallback] Reçu : RiseHands (UI ou clavier). Time=" + Time.time);
+       // Debug.Log("[TestCallback] Reçu : RiseHands (UI ou clavier). Time=" + Time.time);
         OnPlayerInput(Rule.ActionType.RaiseHands);
     }
 
