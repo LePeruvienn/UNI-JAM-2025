@@ -13,19 +13,53 @@ MonoBehaviour:
   m_Name: Subtitles
   m_EditorClassIdentifier: Assembly-CSharp::Textdata
   text:
-  - Il parait clair qu on ne peut pas etre en colere et sauter en meme temps, car
-    des qu on commence a <im>sauter</im>, la <im>colere</im> perd toute credibilite.
-    Le <im>cerveau</im> choisit vite entre rage et stabilite, et la rage perd a chaque
-    fois.
-  - 'Dire que le kebab est meilleur que le tacos n est pas une provocation, juste
-    une constatation: le <im>kebab</im> brille par sa <im>simplicite</im> et son
-    confort moral. Pendant ce temps, le <im>tacos</im> tente de convaincre, mais
-    il reste souvent trop ambitieux pour son propre bien.'
-  - 'Affirmer que la Paris Games Week etait desastreuse parce que les joueurs ne
-    prennent pas de douches n a rien d exagere: la <im>Paris Games Week</im> a vite
-    vire au marathon olfactif. Quand la <im>notion de savon</im> disparait, la <im>survie
-    olfactive</im> devient un sport de haut niveau.'
-  - Dire qu investir dans la Unijam est un placement financier fort lucratif semble
-    fou, mais miser sur la <im>Unijam</im> revient a parier sur la <im>creativite
-    etudiante</im>. Et parfois, ce pari genere un <im>retour sur investissement</im>
-    qui ferait rougir un trader.
+  - "L\u2019<im>odeur infecte</im> de la Paris Games Week provient en grande partie
+    du <im>manque de douches</im> chez certains visiteurs, dont l\u2019accumulation
+    sur plusieurs jours a transform\xE9 les halls clos en v\xE9ritables <im>chambres
+    de fermentation</im>. "
+  - "Le <im>kebab</im> surpasse le <im>tacos</im> par son <im>\xE9quilibre parfait</im>
+    entre <im>simplicit\xE9</im> et <im>richesse aromatique</im> : une <im>viande
+    r\xF4tie \xE0 la perfection</im>, juteuse et croustillante, un pain l\xE9ger
+    qui ne s\u2019effondre pas, des l\xE9gumes frais qui apportent du croquant, et
+    surtout une <im>sauce ma\xEEtris\xE9e</im> qui sublime l\u2019ensemble au lieu
+    de l\u2019\xE9touffer."
+  - "La queue interminable de la Paris Games Week avance si lentement que certains
+    visiteurs ont eu le temps de <im>r\xE9cup\xE9rer un dipl\xF4me</im>, de <im>faire
+    une sieste compl\xE8te</im>, et m\xEAme de <im>remettre en question leur existence</im>
+    avant d\u2019atteindre l\u2019entr\xE9e."
+  - "Le nouveau patch du jeu a ajout\xE9 un bug qui permet de traverser les murs
+    avec un <im>saut ridicule</im>, un <im>regard d\xE9termin\xE9</im> et un <im>niveau
+    d\u2019incompr\xE9hension record</im>."
+  - "Dans un <im>tournoi comp\xE9titif</im>, un joueur a tellement spamm\xE9 un bouton
+    qu\u2019il a d\xE9clench\xE9 un <im>incendie m\xE9canique</im>, r\xE9veill\xE9
+    un <im>ancien dieu du plastique</im> et invoqu\xE9 une <im>odeur de clavier r\xF4ti</im>."
+  - "Le concours de cris a atteint un niveau tel que les organisateurs ont d\xFB
+    installer un <im>radar acoustique</im>, \xE9quiper les juges de <im>bouchons
+    anti-cataclysme</im>, et d\xE9clarer la salle en <im>zone sinistr\xE9e</im>."
+  - "Lors de la d\xE9mo, un PNJ est rest\xE9 bloqu\xE9 dans une boucle de <im>salutations
+    r\xE9p\xE9titives</im>, provoquant une \xE9pid\xE9mie de <im>bonjour intempestifs</im>
+    et un moment de <im>g\xEAne absolue</im> pour tout le monde."
+  - "Un speedrunner a r\xE9ussi \xE0 terminer le jeu gr\xE2ce \xE0 un <im>glitch
+    improbable</im>, une <im>chute infinie</im> et une quantit\xE9 surprenante de
+    <im>choix moralement ambigu</im>."
+  - "Le nouveau casque VR est tellement immersif qu\u2019un joueur a tent\xE9 de
+    <im>payer un PNJ</im>, de <im>rentrer dans une maison imaginaire</im> et d\u2019<im>adopter
+    un hologramme</im>."
+  - "Le buffet du salon proposait un sandwich tellement \xE9trange qu\u2019il contenait
+    de <im>la salade philosophique</im>, une tranche de <im>fromage existentiel</im>
+    et une pointe de <im>moutarde introspective</im>."
+  - "Un visiteur a tellement cri\xE9 de joie qu\u2019il a r\xE9veill\xE9 un <im>pigeon
+    fatigu\xE9</im>, d\xE9plac\xE9 une <im>toile d\u2019araign\xE9e historique</im>
+    et bris\xE9 le <im>silence ancestral</im> de la salle."
+  - "Le photomaton fonctionnait si mal qu\u2019il transformait chaque clich\xE9 en
+    <im>portrait dramatique</im>, avec une touche de <im>panique artistique</im>
+    et un soup\xE7on de <im>d\xE9formation philosophique</im>."
+  - "Un enfant a tellement couru qu\u2019il a g\xE9n\xE9r\xE9 une <im>tra\xEEn\xE9e
+    de chaos</im>, renvers\xE9 un <im>snack innocent</im> et d\xE9clench\xE9 un d\xE9but
+    d\u2019<im>ouragan miniature</im>."
+  - "La mascotte officielle \xE9tait tellement motiv\xE9e qu\u2019elle a distribu\xE9
+    une dose excessive de <im>enthousiasme forc\xE9</im>, de <im>high-fives non sollicit\xE9s</im>
+    et de <im>cauchemars potentiels</im>."
+  - "L'<im>Unijam</im> est tellement bien organis\xE9e que <im> les participants</im>
+    n'ont jamais du attendre pour manger. Les <im> repas </im> sont toujours arrives
+    <im> a temps </im>."
