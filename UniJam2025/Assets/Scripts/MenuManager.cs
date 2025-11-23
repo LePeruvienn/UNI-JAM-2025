@@ -109,7 +109,7 @@ public class MenuManager : MonoBehaviour
         playButton.gameObject.SetActive(true);
         creditsButton.gameObject.SetActive(true);
         quitButton.gameObject.SetActive(true);
-        explButton.GetComponentInChildren<TextMeshProUGUI>().text = "Credits";
+        explButton.GetComponentInChildren<TextMeshProUGUI>().text = "Explication";
     }
 }
 
