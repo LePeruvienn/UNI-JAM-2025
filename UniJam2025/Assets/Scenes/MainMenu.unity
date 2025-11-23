@@ -178,8 +178,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Credits
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 10c3c9e8910211b48840ae3ad071194f, type: 2}
-  m_sharedMaterial: {fileID: 7940353801570604948, guid: 10c3c9e8910211b48840ae3ad071194f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 07f2e8161644f44b98f547bd4d37332c, type: 2}
+  m_sharedMaterial: {fileID: -775847643772733522, guid: 07f2e8161644f44b98f547bd4d37332c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -674,9 +674,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Musique : Aur\xE9lie Wagner\n"
+  m_text: 'Musique : Aurelie Wagner
+
+'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 10c3c9e8910211b48840ae3ad071194f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 07f2e8161644f44b98f547bd4d37332c, type: 2}
   m_sharedMaterial: {fileID: 7940353801570604948, guid: 10c3c9e8910211b48840ae3ad071194f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -701,14 +703,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.3
-  m_fontSizeBase: 32.3
+  m_fontSize: 23
+  m_fontSizeBase: 23
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -810,11 +812,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Notre team dev :\n\u2022 Amazigh Halil : CStudio - CentraleSup\xE9lec
-    \n\u2022 Arthur Pinel : ENSIIE\n\u2022 Far\xE8s Gati : CStudio - CentraleSup\xE9lec
-    \n\u2022 Mathieu Bontemps : LPJV"
+  m_text: "Notre team dev :\n\u2022 Amazigh Halil : CStudio - CentraleSupelec \n\u2022
+    Arthur Pinel : ENSIIE\n\u2022 Fares Gati : CStudio - CentraleSupelec \n\u2022
+    Mathieu Bontemps : LPJV"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 10c3c9e8910211b48840ae3ad071194f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 07f2e8161644f44b98f547bd4d37332c, type: 2}
   m_sharedMaterial: {fileID: 7940353801570604948, guid: 10c3c9e8910211b48840ae3ad071194f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -839,8 +841,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.9
-  m_fontSizeBase: 32.9
+  m_fontSize: 23
+  m_fontSizeBase: 23
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1000,13 +1002,31 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Simon est refait quand tu applaudis ses moves.\n\nR\xE8gles du game :\n\nTu
-    suis uniquement les r\xE8gles affich\xE9es sur les slides.\n\nQuand Simon montre
-    un slide, tu fais toutes les actions indiqu\xE9es.\n\n\xC0 chaque nouveau slide,
-    les r\xE8gles s\u2019additionnent : apr\xE8s 3 slides = 3 r\xE8gles actives en
-    m\xEAme temps."
+  m_text: 'Simon fait une presentation et il est refait quand tu applaudis ses moves.
+
+
+    Regles
+    du game :
+
+    Simon te presente des regles au fur et a mesure du temps. Tu dois
+    suivre ces regles a la lettre pour pas te taper la honte.
+
+    uniquement lorsque
+    simon leve les bras (et seulement quand il le fait), regarde le slide en cours
+    et agit selon les regles que tu connais.
+
+    Si il ne leve pas les bras, tais
+    toi et ecoute.
+
+
+    ATTENTION: Les regles s''accumulent !! Si une regle te demande
+    de clap 3 fois et une autre de clap 2 fois, tu dois clap 5 fois en tout !
+
+
+    SUIVEZ
+    BIEN'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 10c3c9e8910211b48840ae3ad071194f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 07f2e8161644f44b98f547bd4d37332c, type: 2}
   m_sharedMaterial: {fileID: 7940353801570604948, guid: 10c3c9e8910211b48840ae3ad071194f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1256,8 +1276,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Quitter
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 10c3c9e8910211b48840ae3ad071194f, type: 2}
-  m_sharedMaterial: {fileID: 7940353801570604948, guid: 10c3c9e8910211b48840ae3ad071194f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 07f2e8161644f44b98f547bd4d37332c, type: 2}
+  m_sharedMaterial: {fileID: -775847643772733522, guid: 07f2e8161644f44b98f547bd4d37332c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1395,7 +1415,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1536,8 +1556,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Explication
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 10c3c9e8910211b48840ae3ad071194f, type: 2}
-  m_sharedMaterial: {fileID: 7940353801570604948, guid: 10c3c9e8910211b48840ae3ad071194f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 07f2e8161644f44b98f547bd4d37332c, type: 2}
+  m_sharedMaterial: {fileID: -775847643772733522, guid: 07f2e8161644f44b98f547bd4d37332c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1793,8 +1813,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Jouer
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 10c3c9e8910211b48840ae3ad071194f, type: 2}
-  m_sharedMaterial: {fileID: 7940353801570604948, guid: 10c3c9e8910211b48840ae3ad071194f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 07f2e8161644f44b98f547bd4d37332c, type: 2}
+  m_sharedMaterial: {fileID: -775847643772733522, guid: 07f2e8161644f44b98f547bd4d37332c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2521,10 +2541,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Nos merveilleuses artistes :\n\u2022 Aur\xE9lie Wagner : CStudio - CentraleSup\xE9lec
+  m_text: "Nos merveilleuses artistes :\n\u2022 Aurelie Wagner : CStudio - CentraleSupelec
     \n\u2022 Lara Ventura : LPJV\n\u2022 Sarah Sim : Ynov Paris Campus\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 10c3c9e8910211b48840ae3ad071194f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 07f2e8161644f44b98f547bd4d37332c, type: 2}
   m_sharedMaterial: {fileID: 7940353801570604948, guid: 10c3c9e8910211b48840ae3ad071194f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2549,8 +2569,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.3
-  m_fontSizeBase: 32.3
+  m_fontSize: 23
+  m_fontSizeBase: 23
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
