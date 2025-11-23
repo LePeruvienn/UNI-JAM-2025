@@ -114,7 +114,7 @@ public class PlayerManager : MonoBehaviour
     private void Die()
     {
         Debug.Log("[PlayerManager] Mort détectée.");
-        GameObject.FindAnyObjectByType<ChangeScene>()?.Goto("Main Menu");
+        GameObject.FindAnyObjectByType<ChangeScene>()?.Goto("MainMenu");
 
         gameObject.SetActive(false);
     }
