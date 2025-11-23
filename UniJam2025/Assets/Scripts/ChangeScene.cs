@@ -38,8 +38,7 @@ public class ChangeScene : MonoBehaviour
             sr.material = new Material(Shader.Find("Sprites/Default"));
 
             // Force sorting layer
-            sr.sortingLayerName = "UI";
-            sr.sortingOrder = 1000;
+            sr.sortingLayerName = "Rideaux";
 
             // Position in front of camera
             Vector3 pos = sr.transform.position;
