@@ -98,7 +98,7 @@ public class PlayerManager : MonoBehaviour
         Debug.Log($"[PlayerManager] Dégâts: 1 -> HP = {currentHealth}/{maxHealth}");
         onDamaged?.Invoke();
 
-        if (currentHealth == 0)
+        if (currentHealth <= 0)
             Die();
     }
 
