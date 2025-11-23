@@ -44,7 +44,16 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Ridau
+  - name: Simon
+    uniqueID: 2395153309
+    locked: 0
+  - name: Audiance
+    uniqueID: 2717634181
+    locked: 0
+  - name: Player
+    uniqueID: 601783023
+    locked: 0
+  - name: Rideaux
     uniqueID: 169923391
     locked: 0
   m_RenderingLayers:

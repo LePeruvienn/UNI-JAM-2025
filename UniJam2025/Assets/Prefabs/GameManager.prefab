@@ -58,7 +58,7 @@ MonoBehaviour:
   showRuleSlideEveryXSlide: 5
   simonPresentProbability: 0.5
   timeLimit: 5
-  failTime: 4
+  failTime: 7
   successfulSlideDelay: 4
   ruleSlideDelay: 7
   audioSource: {fileID: 0}
