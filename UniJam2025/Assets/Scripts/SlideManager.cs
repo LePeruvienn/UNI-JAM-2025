@@ -74,7 +74,7 @@ namespace Assets
                 case Rule.ConditionType.TitleUnderlined:
                     return slideTitle.text.Contains("<u>");
                 case Rule.ConditionType.ImgDiagram:
-                    return shownTextureIndex == 0;
+                    return shownTextureIndex <= 3;
                 default:
                     return false;
             }
