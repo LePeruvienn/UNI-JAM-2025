@@ -334,8 +334,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0dbaf9aff10f6cf45b2ca2b32080b14c, type: 2}
-  m_sharedMaterial: {fileID: 4978729064763665947, guid: 0dbaf9aff10f6cf45b2ca2b32080b14c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 07f2e8161644f44b98f547bd4d37332c, type: 2}
+  m_sharedMaterial: {fileID: -775847643772733522, guid: 07f2e8161644f44b98f547bd4d37332c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -702,7 +702,7 @@ MonoBehaviour:
     a developer but oh well i guess the game crashed haha too bad lol maybe try not
     breaking the game in the future and stop being an idiot
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0dbaf9aff10f6cf45b2ca2b32080b14c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 07f2e8161644f44b98f547bd4d37332c, type: 2}
   m_sharedMaterial: {fileID: 4978729064763665947, guid: 0dbaf9aff10f6cf45b2ca2b32080b14c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -768,7 +768,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6643598436530794347

@@ -55,6 +55,9 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         //DontDestroyOnLoad(gameObject);
+        slideCount = 0;
+        activeRules.Clear();
+        presentedRules.Clear();
 
         LoadNextSlide();
     } 
@@ -291,7 +294,7 @@ public class GameManager : MonoBehaviour
         OnSlideFail?.Invoke(true);
         simon.LockState(SimonState.Idle);
 
-        string failedRulesDescription = "Fail !\nVoici toutes les regles:\n";
+        string failedRulesDescription = "Fail !\nVoici toutes les regles:\nAppliquer les regles suivantes seulement quand Simon leve les bras\n";
 
         /*foreach (Rule.ActionType actionType in Enum.GetValues(typeof(Rule.ActionType)))
         {
