@@ -55,10 +55,10 @@ MonoBehaviour:
       m_Calls: []
   slideManager: {fileID: 0}
   simon: {fileID: 0}
-  showRuleSlideEveryXSlide: 5
+  showRuleSlideEveryXSlide: 7
   simonPresentProbability: 0.7
   timeLimit: 5
-  failTime: 7
+  failTime: 6
   successfulSlideDelay: 4
   ruleSlideDelay: 7
   audioSource: {fileID: 0}

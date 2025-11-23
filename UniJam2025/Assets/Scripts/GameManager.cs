@@ -284,7 +284,7 @@ public class GameManager : MonoBehaviour
 
     public void TriggerFail()
     {
-
+        timerRunning = false;
         requiredActions.Clear();
         pendingActions.Clear();
 
@@ -293,6 +293,7 @@ public class GameManager : MonoBehaviour
             StopCoroutine(failRoutine);
         }
 
+        StopAllCoroutines();
         failRoutine = StartCoroutine(FailCoroutine());
     }
 

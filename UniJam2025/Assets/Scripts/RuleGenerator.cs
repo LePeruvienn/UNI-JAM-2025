@@ -45,9 +45,9 @@ public static class RuleGenerator
             Rule.ConditionType.TextRed => "si le texte est rouge",
             Rule.ConditionType.TextBlue => "si le texte est bleu",
             Rule.ConditionType.TextYellow => "si le texte est jaune",
-            Rule.ConditionType.TitleUnderlined => "si le titre est souligne",
+            Rule.ConditionType.TitleUnderlined => "si le titre est souligné",
             Rule.ConditionType.ImgDiagram => "si l'image est un diagramme",
-            Rule.ConditionType.ImgAnimal => "Si l'image est un animal REEL",
+            Rule.ConditionType.ImgAnimal => "Si l'image est un animal réel",
             _ => ""
         };
 
@@ -55,7 +55,7 @@ public static class RuleGenerator
         {
             Rule.ActionType.Clap => "ajoute XXX claps",
             Rule.ActionType.HighFive => "ajoute XXX high-fives",
-            Rule.ActionType.RaiseHands => "ajoute XXX levees des mains",
+            Rule.ActionType.RaiseHands => "ajoute XXX levées des mains",
             _ => ""
         };
 
