@@ -37,6 +37,8 @@ public class Simon : MonoBehaviour
     private int direction = 1;
     private Color normalColor;
 
+    private bool isLocked;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -102,7 +104,12 @@ public class Simon : MonoBehaviour
 
     public void ChangeState(SimonState newState)
     {
+        if (isLocked)
+            return;
+
         state = newState;
+
+        isLocked = false;
 
         switch (newState)
         {
@@ -135,5 +142,17 @@ public class Simon : MonoBehaviour
     public SimonState GetSimonState()
     {
         return state;
+    }
+
+    public void LockState(SimonState state)
+    {
+        ChangeState(state);
+        isLocked = true;
+    }
+
+    public void UnLockState(SimonState state)
+    {
+        isLocked = false;
+        ChangeState(state);
     }
 }
