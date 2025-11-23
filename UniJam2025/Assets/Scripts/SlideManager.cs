@@ -70,11 +70,11 @@ namespace Assets
             switch (rule.conditionType)
             {
                 case Rule.ConditionType.TextRed:
-                    return slideTitle.text.Contains("<color=ff0000>") || slideText.text.Contains("<color=ff0000>");
+                    return slideTitle.text.Contains("color=#ff0000") || slideText.text.Contains("color=#ff0000");
                 case Rule.ConditionType.TitleUnderlined:
                     return slideTitle.text.Contains("<u>");
                 case Rule.ConditionType.ImgDiagram:
-                    return shownTextureIndex <= 3;
+                    return allImages[shownTextureIndex].name.Contains("graph");
                 default:
                     return false;
             }

@@ -28,7 +28,7 @@ public static class RuleGenerator
             r.conditionType == randomCondition &&
             r.actionType == randomAction) && attempts < maxAttempts);
 
-        int randomAmount = Random.Range(2, 6);
+        int randomAmount = Random.Range(1, 4);
 
         string description = GenerateDescription(randomCondition, randomAction, randomAmount);
 
@@ -50,12 +50,12 @@ public static class RuleGenerator
 
         string actionText = action switch
         {
-            Rule.ActionType.Clap => "applaudis",
-            Rule.ActionType.HighFive => "fais un high-five",
-            Rule.ActionType.RaiseHands => "lève les mains",
+            Rule.ActionType.Clap => "ajoute XXX claps",
+            Rule.ActionType.HighFive => "ajoute XXX high-fives",
+            Rule.ActionType.RaiseHands => "ajoute XXX levées des mains",
             _ => ""
         };
 
-        return $" {conditionText}, {actionText} {amount} fois.";
+        return $" {conditionText}, {actionText.Replace("XXX", amount.ToString())}";
     }
 }

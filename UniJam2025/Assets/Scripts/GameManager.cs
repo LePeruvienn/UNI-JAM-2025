@@ -1,4 +1,5 @@
 using Assets;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     private List<Rule.ActionType> pendingActions = new List<Rule.ActionType>();
 
     public List<Rule> presentedRules = new List<Rule>();
+    public List<Rule> activeRules = new List<Rule>();
 
 
     public SlideManager slideManager;
@@ -30,9 +32,12 @@ public class GameManager : MonoBehaviour
     private float slideTimer = 0f;
     private bool timerRunning = false;
 
+    public int showRuleSlideEveryXSlide = 5;
+    public float simonPresentProbability = 0.5f;
     public float timeLimit = 5f;
-
     public float failTime = 4f;
+    public float successfulSlideDelay = 4f;
+    public float ruleSlideDelay = 7f;
 
 
     private Coroutine failRoutine;
@@ -68,14 +73,12 @@ public class GameManager : MonoBehaviour
         requiredActions = BuildRequiredActions(rules);
         pendingActions = new List<Rule.ActionType>(requiredActions);
 
-        Debug.Log("[GameManager] New slide rules received.");
+        Debug.Log("[GameManager] Active rules set.");
 
-        foreach (var action in requiredActions)
+        /*foreach (var action in requiredActions)
         {
             Debug.Log("Required: " + action);
-        }
-
-        StartSlideTimer();
+        }*/
     }
 
 
@@ -102,7 +105,7 @@ public class GameManager : MonoBehaviour
     // Called by InputMgr whenever the player presses one of the action buttons
     public void OnPlayerInput(Rule.ActionType input)
     {
-       Debug.Log("[GameManager] Player input: " + input);
+       //Debug.Log("[GameManager] Player input: " + input);
 
         if (pendingActions.Contains(input) && simon.GetSimonState() == SimonState.Posing) //add simon active check
         {
@@ -145,7 +148,7 @@ public class GameManager : MonoBehaviour
         requiredActions.Clear();
         pendingActions.Clear();
 
-        if (slideCount % 5 == 1)
+        if (slideCount % showRuleSlideEveryXSlide == 1)
         {
             Rule newRule = RuleGenerator.GenerateRandomRule(presentedRules);
             presentedRules.Add(newRule);
@@ -160,30 +163,38 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // Build active rules BEFORE calling SetRules()
-            List<Rule> activeRules = new List<Rule>();
-
-            foreach (var rule in presentedRules)
-            {
-                activeRules.Add(rule);
-            }
-
-            // Now correctly build player tasks
-            SetRules(activeRules);
+            slideManager.GenerateSlide();
 
             // Choose Simon state
-            if (Random.value > 0.5f)
+            if (UnityEngine.Random.value < simonPresentProbability)
                 simon.ChangeState(SimonState.Posing);
             else
                 simon.ChangeState(SimonState.Walking);
 
-            slideManager.GenerateSlide();
+            // Build active rules BEFORE calling SetRules()
+            activeRules.Clear();
+            
+            if(simon.GetSimonState() == SimonState.Posing)
+            {
+                foreach (Rule rule in presentedRules)
+                {
+                    if (slideManager.IsRuleActive(rule))
+                    {
+                        Debug.Log($"{rule.conditionType} is tested as true");
+                        activeRules.Add(rule);
+                    }
+                    else
+                        Debug.Log($"{rule.conditionType} is tested as false");
+                }
+
+                // Now correctly build player tasks
+                SetRules(activeRules);
+            }
+
+            StartSlideTimer();
         }
     }
     
-
-
-
     private void StartSlideTimer()
     {
         if (!timerRunning)
@@ -196,16 +207,17 @@ public class GameManager : MonoBehaviour
 
     private void SlideFailedDueToTimeout()
     {
-        Debug.Log("Slide failed: Time expired.");
 
-        if (simon.GetSimonState().Equals("Posing")) {
-
+        if (pendingActions.Count != 0)
+        {
+            Debug.Log("Slide failed: Time expired.");
             TriggerFail();
-
         }
-
-
-        LoadNextSlide();
+        else
+        {
+            Debug.Log("Slide success: Time expired.");
+            LoadNextSlide();
+        }
     }
 
     private void Update()
@@ -239,8 +251,6 @@ public class GameManager : MonoBehaviour
        // Debug.Log("[TestCallback] Reçu : RiseHands (UI ou clavier). Time=" + Time.time);
         OnPlayerInput(Rule.ActionType.RaiseHands);
     }
-
-
 
     public void LoadTestActions()
     {
@@ -293,9 +303,22 @@ public class GameManager : MonoBehaviour
         // play fail audio once at the start of the fail
         PlayClip(failClip);
 
-        simon.ChangeState(SimonState.Walking);
+        string failedRulesDescription = "";
 
-        //SHOW FAIL SLIDE, WAIT FOR 5 SECONDS
+        foreach (Rule.ActionType actionType in Enum.GetValues(typeof(Rule.ActionType)))
+        {
+            if (pendingActions.Contains(actionType))
+            {
+                foreach (Rule r in activeRules)
+                {
+                    if (r.actionType == actionType)
+                        failedRulesDescription += r.description + '\n';
+                }
+            }
+        }
+
+        simon.ChangeState(SimonState.Walking);
+        slideManager.GenerateRuleSlide(failedRulesDescription);
 
         // Wait for failTime seconds
         yield return new WaitForSeconds(failTime);
@@ -304,6 +327,8 @@ public class GameManager : MonoBehaviour
         OnSlideFail?.Invoke(false);
 
         failRoutine = null;
+
+        LoadNextSlide();
     }
 
     private IEnumerator ShowRuleSlideThenContinue(string description)
@@ -312,11 +337,10 @@ public class GameManager : MonoBehaviour
 
         timerRunning = false; // stop gameplay timer
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(ruleSlideDelay);
 
         // Now load the next *gameplay* slide
         LoadNextSlide();
-        StartSlideTimer();
     }
 
     private IEnumerator SuccessfulSlideDelay(Rule.ActionType lastInput)
@@ -327,7 +351,7 @@ public class GameManager : MonoBehaviour
         // Simon stops posing -> walks again during applause
         simon.ChangeState(SimonState.Walking);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(successfulSlideDelay);
 
         LoadNextSlide();
     }
