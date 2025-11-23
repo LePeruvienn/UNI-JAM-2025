@@ -6,12 +6,16 @@ using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
+    public string playSceneName;
+
     public Button playButton;
     public Button quitButton;
     public Button creditsButton;
 
     public GameObject menuTitle;
     public GameObject creditsPanel;
+
+    private ChangeScene changeScene;
 
     private void Start()
     {
@@ -20,6 +24,11 @@ public class MenuManager : MonoBehaviour
         quitButton.onClick.AddListener(QuitGame);
         creditsButton.onClick.AddListener(ToggleCredits);
 
+        changeScene = FindObjectOfType<ChangeScene>();
+
+        if (changeScene == null)
+            Debug.Log("ERROR : CHANGE SCEEN NOT FOUND");
+
         // Start with showing Play and Quit, hide credits panel
         HideCredits();
     }
@@ -27,6 +36,7 @@ public class MenuManager : MonoBehaviour
     private void ShowPlay()
     {
         // Logic for starting the game (to be implemented)
+        changeScene.Goto(playSceneName);
         Debug.Log("Play Button Pressed");
     }
 
