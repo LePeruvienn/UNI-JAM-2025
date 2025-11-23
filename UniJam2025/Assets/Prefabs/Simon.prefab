@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7651056763790275271}
   - component: {fileID: 3956386840365348861}
   - component: {fileID: 876271292088662224}
+  - component: {fileID: 6183011169550311612}
   m_Layer: 0
   m_Name: Simon
   m_TagString: Untagged
@@ -28,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 2186370992241074959}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05, y: -0.12, z: 0}
-  m_LocalScale: {x: 8.3971, y: 8.3971, z: 8.3971}
+  m_LocalPosition: {x: -14.791, y: 27.5986, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -105,7 +106,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: -271239960514594385, guid: a177085b86e460ccfac54b8fdd4c1925, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,20 +129,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e35a5c5cdd8676db08784544ae173a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLocked: 0
-  tempoMin: 1
-  tempoMax: 2
-  idleChance: 0.5
-  baitingChance: 0.2
-  poseChance: 0.1
-  postIdlePoseChance: 0.3
-  poseDurationMin: 1
-  poseDurationMax: 3
-  poseMinCooldown: 10
-  poseMaxCooldown: 15
-  poseMaxDuration: 4
-  baitingDurationMin: 0.5
-  baitingDurationMax: 1
+  minIdleDuration: 1
+  maxIdleDuration: 3
   speed: 2
+  minWalkingDuration: 1
+  maxWalkingDuration: 3
   leftBoundary: {fileID: 0}
   rightBoundary: {fileID: 0}
+  posingColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!95 &6183011169550311612
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2186370992241074959}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 25da789b31720a31d9770ae3db2e3a04, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

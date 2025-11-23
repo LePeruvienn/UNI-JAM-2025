@@ -9,9 +9,6 @@ public enum SimonState {
 
 public class Simon : MonoBehaviour
 {
-    [Header("Tempo settings")]
-    //[SerializeField] private float tempoDuration = 1f;
-
     [Header("Idle settings")]
     [SerializeField] private float minIdleDuration = 1f;
     [SerializeField] private float maxIdleDuration = 3f;
@@ -22,12 +19,15 @@ public class Simon : MonoBehaviour
     [SerializeField] private float maxWalkingDuration = 3f;
     [SerializeField] private Transform leftBoundary;
     [SerializeField] private Transform rightBoundary;
+    [SerializeField] private Transform center;
 
     [Header("Posing settings")]
     [SerializeField] private Color posingColor;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+    private Animator an;
+
 
     private SimonState state;
 
@@ -41,6 +41,7 @@ public class Simon : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        an = GetComponent<Animator>();
         normalColor = sr.color;
 
         ChangeState(SimonState.Walking);
@@ -65,9 +66,17 @@ public class Simon : MonoBehaviour
 
         // Boundaries
         if (transform.position.x > rightBoundary.position.x && direction == 1)
+        {
             direction = -1;
+            sr.flipX = false;
+        }
         else if (transform.position.x < leftBoundary.position.x && direction == -1)
+        {
+
             direction = 1;
+            sr.flipX = true;
+        }
+
 
         rb.linearVelocity = new Vector2(direction * speed, 0);
 
@@ -88,6 +97,7 @@ public class Simon : MonoBehaviour
     private void PickRandomDirection()
     {
         direction = Random.value > 0.5f ? 1 : -1;
+        sr.flipX = direction > 0;
     }
 
     public void ChangeState(SimonState newState)
@@ -97,18 +107,25 @@ public class Simon : MonoBehaviour
         switch (newState)
         {
             case SimonState.Walking:
+                an.SetBool("Walking", true);
+                an.SetBool("Posing", false);
                 PickRandomDirection();
                 sr.color = normalColor;
                 walkTimer = Random.Range(minWalkingDuration, maxWalkingDuration);
                 break;
 
             case SimonState.Idle:
+                an.SetBool("Walking", false);
+                an.SetBool("Posing", false);
                 sr.color = normalColor;
                 rb.linearVelocity = Vector2.zero;
                 idleTimer = Random.Range(minIdleDuration, maxIdleDuration);
                 break;
 
             case SimonState.Posing:
+                sr.flipX = transform.position.x < center.position.x;
+                an.SetBool("Walking", false);
+                an.SetBool("Posing", true);
                 sr.color = posingColor;
                 rb.linearVelocity = Vector2.zero;
                 break;
