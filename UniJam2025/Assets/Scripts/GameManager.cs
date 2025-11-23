@@ -295,6 +295,8 @@ public class GameManager : MonoBehaviour
 
         simon.ChangeState(SimonState.Walking);
 
+        //SHOW FAIL SLIDE, WAIT FOR 5 SECONDS
+
         // Wait for failTime seconds
         yield return new WaitForSeconds(failTime);
 

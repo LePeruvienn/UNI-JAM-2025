@@ -13,16 +13,19 @@ MonoBehaviour:
   m_Name: Subtitles
   m_EditorClassIdentifier: Assembly-CSharp::Textdata
   text:
-  - "L\u2019<im>odeur infecte</im> de la Paris Games Week provient en grande partie
-    du <im>manque de douches</im> chez certains visiteurs, dont l\u2019accumulation
-    sur plusieurs jours a transform\xE9 les halls clos en v\xE9ritables <im>chambres
-    de fermentation</im>. Entre <im>chaleur \xE9touffante</im>, foule compacte et
-    hygi\xE8ne n\xE9glig\xE9e, l\u2019atmosph\xE8re est vite devenue <im>irrespirable</im>,
-    prouvant qu\u2019un simple passage sous l\u2019eau aurait pu sauver bien des
-    narines."
-  - "Le <im>kebab</im> surpasse le <im>tacos</im> par son <im>\xE9quilibre parfait</im>
-    entre <im>simplicit\xE9</im> et <im>richesse aromatique</im> : une <im>viande
-    r\xF4tie \xE0 la perfection</im>, juteuse et croustillante, un pain l\xE9ger
-    qui ne s\u2019effondre pas, des l\xE9gumes frais qui apportent du croquant, et
-    surtout une <im>sauce ma\xEEtris\xE9e</im> qui sublime l\u2019ensemble au lieu
-    de l\u2019\xE9touffer."
+  - Il parait clair qu on ne peut pas etre en colere et sauter en meme temps, car
+    des qu on commence a <im>sauter</im>, la <im>colere</im> perd toute credibilite.
+    Le <im>cerveau</im> choisit vite entre rage et stabilite, et la rage perd a chaque
+    fois.
+  - 'Dire que le kebab est meilleur que le tacos n est pas une provocation, juste
+    une constatation: le <im>kebab</im> brille par sa <im>simplicite</im> et son
+    confort moral. Pendant ce temps, le <im>tacos</im> tente de convaincre, mais
+    il reste souvent trop ambitieux pour son propre bien.'
+  - 'Affirmer que la Paris Games Week etait desastreuse parce que les joueurs ne
+    prennent pas de douches n a rien d exagere: la <im>Paris Games Week</im> a vite
+    vire au marathon olfactif. Quand la <im>notion de savon</im> disparait, la <im>survie
+    olfactive</im> devient un sport de haut niveau.'
+  - Dire qu investir dans la Unijam est un placement financier fort lucratif semble
+    fou, mais miser sur la <im>Unijam</im> revient a parier sur la <im>creativite
+    etudiante</im>. Et parfois, ce pari genere un <im>retour sur investissement</im>
+    qui ferait rougir un trader.
