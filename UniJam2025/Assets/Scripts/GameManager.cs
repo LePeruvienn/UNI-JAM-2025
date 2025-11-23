@@ -336,6 +336,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ShowRuleSlideThenContinue(string description)
     {
+        StopAllCoroutines();
+
         slideManager.GenerateRuleSlide(description);
 
         timerRunning = false; // stop gameplay timer
@@ -348,6 +350,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SuccessfulSlideDelay(Rule.ActionType lastInput)
     {
+
+        StopAllCoroutines();
         // invoke success event so audience reacts
         OnSlideSuccess?.Invoke(lastInput);
 
