@@ -505,7 +505,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &634254181
 GameObject:
@@ -665,8 +665,10 @@ MonoBehaviour:
   playButton: {fileID: 1850994869}
   quitButton: {fileID: 1721410787}
   creditsButton: {fileID: 1934724456}
+  explButton: {fileID: 1647804839}
   menuTitle: {fileID: 1865841376}
   creditsPanel: {fileID: 1991043398}
+  explPanel: {fileID: 349193887}
 --- !u!1 &977190184
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,7 +704,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 18, y: 168}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 789, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &977190186
 MonoBehaviour:
@@ -725,8 +727,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Tu dois t'adapter aux regles affichees sur les slides. \nSi Simon montre
-    sur un slide, tu doit fair toutes les actions des regles qui s'appliquent sur
-    ce slide. \nToutes les regles s'additionnent, dont apres 3 regles, il prendre
+    un slide, tu dois faire toutes les actions des regles qui s'appliquent sur ce
+    slide. \nToutes les regles s'additionnent, dont apres 3 regles, il faut prendre
     les 3 regles en compte."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1321,19 +1323,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1647804840}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 349193887}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1647804840
 MonoBehaviour:
   m_ObjectHideFlags: 0
