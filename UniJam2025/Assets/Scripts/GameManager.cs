@@ -43,14 +43,6 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 
-    [Header("Audio")]
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip failClip;
-    [SerializeField] private AudioClip clapAudienceClip;
-    [SerializeField] private AudioClip hiFiveAudienceClip;
-    [SerializeField] private AudioClip riseHandsAudienceClip;
-    [SerializeField] private AudioClip changeSlideClip;
-
     private void Awake()
     {
         // If an instance already exists and it�s not this, destroy this object
@@ -99,8 +91,6 @@ public class GameManager : MonoBehaviour
         return actions;
     }
 
-
-
     // Called by InputMgr whenever the player presses one of the action buttons
     public void OnPlayerInput(Rule.ActionType input)
     {
@@ -132,9 +122,6 @@ public class GameManager : MonoBehaviour
 
         StopAllCoroutines();
         StartCoroutine(SuccessfulSlideDelay(input));
-
-        // jouer le son d'audience correspondant au succ s
-        PlayAudienceAudio(input);
 
         LoadNextSlide();
     }
@@ -301,9 +288,7 @@ public class GameManager : MonoBehaviour
     {
         // Announce that a fail happened
         OnSlideFail?.Invoke(true);
-
-        // play fail audio once at the start of the fail
-        PlayClip(failClip);
+        simon.ChangeState(SimonState.Idle);
 
         string failedRulesDescription = "Fail !\nVoici toutes les regles:\n";
 
@@ -330,6 +315,7 @@ public class GameManager : MonoBehaviour
 
         // Announce that the fail effect is over
         OnSlideFail?.Invoke(false);
+        simon.ChangeState(SimonState.Walking);
 
         failRoutine = null;
 
@@ -359,28 +345,5 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(successfulSlideDelay);
 
         LoadNextSlide();
-    }
-
-    // Helper functions to play audio
-    private void PlayClip(AudioClip clip)
-    {
-        if (audioSource == null || clip == null) return;
-        audioSource.PlayOneShot(clip);
-    }
-
-    private void PlayAudienceAudio(Rule.ActionType action)
-    {
-        switch (action)
-        {
-            case Rule.ActionType.Clap:
-                PlayClip(clapAudienceClip);
-                break;
-            case Rule.ActionType.HighFive:
-                PlayClip(hiFiveAudienceClip);
-                break;
-            case Rule.ActionType.RaiseHands:
-                PlayClip(riseHandsAudienceClip);
-                break;
-        }
     }
 }
