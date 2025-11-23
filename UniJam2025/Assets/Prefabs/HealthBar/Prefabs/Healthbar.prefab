@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4281872909816404167}
   - component: {fileID: 333312093317240298}
-  - component: {fileID: 8420331061769702783}
+  - component: {fileID: 1630533293833932238}
   - component: {fileID: 5790497646583050108}
   m_Layer: 0
-  m_Name: RadialSegmentedHealthbarSprite
+  m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,9 +26,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7883941298912314718}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 41.666664, y: 41.666664, z: 41.666664}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -93,7 +93,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8420331061769702783
+--- !u!114 &1630533293833932238
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,11 +107,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SegmentCount: 5
   RemovedSegments: 0
-  Spacing: 0.02
-  Color: {r: 0.08669758, g: 1, b: 0, a: 1}
-  Radius: 0.292
-  LineWidth: 0.166
-  Rotation: 54
+  Spacing: 0.04
+  Color: {r: 0, g: 0, b: 0, a: 0}
+  Radius: 0.4
+  LineWidth: 0.04
+  Rotation: 0
 --- !u!222 &5790497646583050108
 CanvasRenderer:
   m_ObjectHideFlags: 0
