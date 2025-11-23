@@ -122,7 +122,8 @@ public class PlayerManager : MonoBehaviour
 
     private void HandleSlideFail(bool value)
     {
-        ApplyDamage();
+        if(value)
+            ApplyDamage();
     }
 
     private void HandleSlideSuccess(Rule.ActionType type)
