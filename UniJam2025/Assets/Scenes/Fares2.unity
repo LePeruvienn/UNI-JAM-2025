@@ -2052,11 +2052,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3724357433389791370, guid: f4fb7521832bb7c46b278c1011efa7ee, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 855.0975
+      value: 934
       objectReference: {fileID: 0}
     - target: {fileID: 3724357433389791370, guid: f4fb7521832bb7c46b278c1011efa7ee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 123.07811
+      value: 266
       objectReference: {fileID: 0}
     - target: {fileID: 3724357433389791370, guid: f4fb7521832bb7c46b278c1011efa7ee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2105,6 +2105,10 @@ PrefabInstance:
     - target: {fileID: 4103096961762186126, guid: f4fb7521832bb7c46b278c1011efa7ee, type: 3}
       propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4374226928900380220, guid: f4fb7521832bb7c46b278c1011efa7ee, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4963439476553083236, guid: f4fb7521832bb7c46b278c1011efa7ee, type: 3}
       propertyPath: m_Name
