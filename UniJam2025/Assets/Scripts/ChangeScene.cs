@@ -3,29 +3,57 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    [Header("Transition")]
-    [SerializeField] private Animator transitionAnimator;
+    [Header("Transition Settings")]
     [SerializeField] private float transitionDuration = 1f;
+
+    private Animator animator;
+    private SpriteRenderer sr;
 
     private static ChangeScene existingInstance;
     private bool changing = false;
 
     private void Awake()
     {
-        // If another instance exists, destroy this one
+        // Singleton
         if (existingInstance != null && existingInstance != this)
         {
             Destroy(gameObject);
             return;
         }
 
-        // This is the first/only instance
         existingInstance = this;
         DontDestroyOnLoad(gameObject);
+
+        CacheComponents();
+    }
+
+    private void CacheComponents()
+    {
+        animator = GetComponentInChildren<Animator>();
+        sr = GetComponentInChildren<SpriteRenderer>();
+
+        if (sr != null)
+        {
+            // Force default sprite material
+            sr.material = new Material(Shader.Find("Sprites/Default"));
+
+            // Force sorting layer
+            sr.sortingLayerName = "UI";
+            sr.sortingOrder = 1000;
+
+            // Position in front of camera
+            Vector3 pos = sr.transform.position;
+            pos.z = Camera.main.transform.position.z + 5f; // devant la caméra
+            sr.transform.position = pos;
+
+            // Scale sprite to fill screen
+            ScaleSpriteToScreen();
+        }
     }
 
     public void Goto(string sceneName)
     {
+        if (changing) return;
         if (string.IsNullOrEmpty(sceneName))
         {
             Debug.LogError("Scene name cannot be empty!");
@@ -37,29 +65,65 @@ public class ChangeScene : MonoBehaviour
 
     private System.Collections.IEnumerator LoadSceneWithTransition(string sceneName)
     {
-        if (changing)
-            yield break;
-
         changing = true;
 
         // Play close animation
-        if (transitionAnimator != null)
-            transitionAnimator.SetTrigger("Close");
+        if (animator != null)
+            animator.SetTrigger("Close");
 
-        // Wait for animation to finish
         yield return new WaitForSeconds(transitionDuration);
 
-        // Load next scene async
+        // Load next scene
         AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneName);
-
         while (!loadOp.isDone)
             yield return null;
 
+        // After load, refresh references
+        CacheComponents();
+
         // Play open animation
-        if (transitionAnimator != null)
-            transitionAnimator.SetTrigger("Open");
+        if (animator != null)
+            animator.SetTrigger("Open");
 
         changing = false;
     }
+
+    private void ScaleSpriteToScreen()
+    {
+        if (sr == null || sr.sprite == null) return;
+
+        Camera cam = Camera.main;
+        if (cam == null) return;
+
+        float worldScreenHeight = cam.orthographicSize * 2f;
+        float worldScreenWidth = worldScreenHeight * Screen.width / Screen.height;
+
+        float spriteWidth = sr.sprite.bounds.size.x;
+        float spriteHeight = sr.sprite.bounds.size.y;
+
+        float scaleX = worldScreenWidth / spriteWidth;
+        float scaleY = worldScreenHeight / spriteHeight;
+
+        sr.transform.localScale = new Vector3(scaleX, scaleY, 1f);
+
+        PositionInFrontOfCamera();
+    }
+
+    private void PositionInFrontOfCamera()
+    {
+        if (sr == null) return;
+
+        Camera cam = Camera.main;
+
+        if (cam == null) return;
+
+        Vector3 camPos = cam.transform.position;
+        sr.transform.position = new Vector3(
+            camPos.x,                // follow camera X
+            camPos.y,                // follow camera Y
+            camPos.z + 5f            // in front of camera
+        );
+    }
+
 }
 

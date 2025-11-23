@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -24,6 +25,10 @@ public class Audience : MonoBehaviour
 
     private UnityAction<Rule.ActionType> _successListener;
     private UnityAction<bool> _failListener;
+
+    // audio management
+    private Coroutine _audioRestoreRoutine;
+    private List<AudioSource> _pausedSources = new List<AudioSource>();
 
     private void Awake()
     {
@@ -60,6 +65,14 @@ public class Audience : MonoBehaviour
             gameManager.OnSlideSuccess?.RemoveListener(_successListener);
         if (_failListener != null)
             gameManager.OnSlideFail?.RemoveListener(_failListener);
+
+        // restore any paused audio if we are destroyed/disabled while holding them
+        if (_audioRestoreRoutine != null)
+        {
+            StopCoroutine(_audioRestoreRoutine);
+            _audioRestoreRoutine = null;
+        }
+        RestorePausedSources();
     }
 
     private void HandleSlideSuccess(Rule.ActionType action)
@@ -121,6 +134,68 @@ public class Audience : MonoBehaviour
     private void PlayClip(AudioClip clip)
     {
         if (audioSource == null || clip == null) return;
+
+        // If a previous restore coroutine is running, stop it and restore before starting new pause
+        if (_audioRestoreRoutine != null)
+        {
+            StopCoroutine(_audioRestoreRoutine);
+            _audioRestoreRoutine = null;
+            RestorePausedSources();
+        }
+
+        // Pause (not Stop) other AudioSources so we can resume them later
+        _pausedSources.Clear();
+        var allSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+        foreach (var src in allSources)
+        {
+            if (src == audioSource) continue;
+            if (src.isPlaying)
+            {
+                try
+                {
+                    src.Pause();
+                    _pausedSources.Add(src);
+                }
+                catch
+                {
+                    // ignore sources that cannot be paused for any reason
+                }
+            }
+        }
+
+        // Play requested clip
         audioSource.PlayOneShot(clip);
+
+        // schedule resume of paused sources after clip duration
+        _audioRestoreRoutine = StartCoroutine(RestorePausedAfterDelay(clip.length));
+    }
+
+    private IEnumerator RestorePausedAfterDelay(float delay)
+    {
+        // wait clip length (if 0 or negative, restore immediately)
+        if (delay > 0f)
+            yield return new WaitForSeconds(delay);
+        RestorePausedSources();
+        _audioRestoreRoutine = null;
+    }
+
+    private void RestorePausedSources()
+    {
+        if (_pausedSources == null || _pausedSources.Count == 0) return;
+
+        foreach (var src in _pausedSources)
+        {
+            if (src == null) continue;
+            try
+            {
+                src.UnPause();
+            }
+            catch
+            {
+                // fallback to Play if UnPause fails
+                try { src.Play(); } catch { }
+            }
+        }
+        _pausedSources.Clear();
     }
 }

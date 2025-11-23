@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
     public float successfulSlideDelay = 4f;
     public float ruleSlideDelay = 7f;
 
-
     private Coroutine failRoutine;
 
     public static GameManager Instance { get; private set; }
