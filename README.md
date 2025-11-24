@@ -1,4 +1,4 @@
-# 🎮 Unijam 2025 – *Survive the Presentation!*  
+# 🎮 Unijam 2025 – *Simon Claps*  
 
 Vous êtes confortablement installé dans le public… ou du moins, vous le croyez.  
 Simon défile une série de diapositives, et chacune renferme une **règle secrète** que vous devez suivre. À vous de rester attentif et de **réagir correctement** pour gagner le respect du public.  
