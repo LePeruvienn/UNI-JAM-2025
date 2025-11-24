@@ -1,3 +1,5 @@
+![logo](UniJam2025/Assets/Resources/Sprites/menu_texte.png)
+
 # 🎮 Unijam 2025 – *Simon Claps*  
 
 Vous êtes confortablement installé dans le public… ou du moins, vous le croyez.  
