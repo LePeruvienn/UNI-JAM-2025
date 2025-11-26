@@ -23,4 +23,4 @@ Saurez-vous garder votre sang-froid, déchiffrer les attentes du public et **sur
 - Farès GATI
 - Aurélie WAGNER
 - Amazigh HALIL
-- - Arthur PINEL
+- Arthur PINEL
